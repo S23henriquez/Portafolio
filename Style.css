@@ -1,0 +1,273 @@
+@font-face{
+  font-family: 'Pixel';
+  src: url('Pixellari.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Estilo general */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #7f4ca5;
+  color: #333;
+}
+
+
+/*Barra de Mario Bros*/
+.Portada {
+  position: relative; 
+  height: auto;      
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Pixel', monospace;
+
+  /* Fondo */
+  background-image: url('img/Mario_World.jpg');
+  background-size: cover;       
+  background-position: center;  /* centrada */
+  background-repeat: no-repeat; 
+}
+
+/* Contenedor de la barra */
+.barra-mario{
+  width: 80%;
+  height: 20px;
+  background: #555;
+  border: 3px solid #333;
+  border-radius: 5px;
+  margin: 15px auto;
+  position: relative;
+  overflow: hidden;
+  
+}
+/* Parte de Progreso ( la que se rellana) */
+.progreso {
+  width: 0%;               
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    White,  
+    White 10px,
+    Purple 10px, 
+    Purple 20px
+  );
+  animation: cargar 15s ;
+}
+
+/* Animación estilo "relleno" */
+@keyframes cargar {
+  0% { width: 0%; }
+  50% { width: 100%; }
+  100% { width: 0%; }
+}
+
+
+/*Boton de tema */
+
+.opciones{
+  position: relative;
+  top: r20p;
+}
+
+/* Estilo del encabezado */
+
+/* Mini barra de navegación en portada */
+
+
+.portada-nav {
+  position: fixed;
+  top: 20px;          /* desde arriba */
+  right: 20px;        /* desde la derecha */
+  z-index: 1000;
+}
+
+.portada-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portada-nav li {
+  margin: 10px 0;
+  position: relative; /* necesario para el tooltip */
+}
+
+.portada-nav .nav-bullet {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #ff0000; /* borde rojo */
+  background: transparent;
+  display: block;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover y activo */
+.portada-nav .nav-bullet:hover,
+.portada-nav .nav-bullet.current {
+  background: #FFD700; /* amarillo dorado */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  transform: scale(1.2);
+}
+
+/* Tooltip */
+.nav-bullet::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 25px; /* distancia del bullet */
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  font-size: 12px;
+}
+
+/* Mostrar tooltip al hover */
+.portada-nav .nav-bullet:hover::after {
+  opacity: 0.5;
+}
+
+
+.Portada h1{
+    font-family: 'Pixel', Franklin 'Franklin Gothic Medium';
+    background: rgb(255, 255, 255);
+    color: #000000;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 68px;
+
+}
+
+/* Encabezado principal */
+
+
+#One {
+  background: #72a54c;
+  color: rgb(0, 0, 0);
+  padding: 50px;
+  text-align: center;
+  border: 5px solid black;
+}
+
+.foto img {
+  width: 150px;
+  height: auto;
+  border-radius: 10%;
+  margin-top: 20px;
+  border: 3px solid gold;
+}
+
+.foto img:hover {
+  transform: translateY(-10px);
+  box-shadow: 15px 15px 15px rgba(0,0,0,0.6);
+}
+
+
+
+
+/* Secciones */
+section {
+  padding: 40px;
+  margin: 20px auto;
+  width: 80%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Títulos */
+h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Listas de habilidades */
+#habilidades ul {
+  list-style: none;
+  padding: 0;
+}
+
+#habilidades li {
+  background: #e0f7e9;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Proyectos */
+.proyecto {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.proyecto h3 {
+  margin: 0 0 10px;
+}
+
+/* Enlaces */
+a {
+  color: #ff0000;
+  text-decoration: none;
+  font-weight: bold;
+  background: transparent;
+  padding: 5px 10px;
+}
+/*Menu de Navegación*/
+nav {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 10px 0;
+}
+
+.nav-bullet {
+  width: 5px;
+  height: 15px;
+  border-radius: 10%;
+  border: 2px solid #000000; /* borde rojo */
+  background: #bfbdbe;    /* fondo transparente por defecto */
+  cursor: pointer;
+  display: block;
+  transition: all 0.3s ease; /* animaciones suaves */
+}
+
+/* Hover */
+.nav-bullet:hover {
+  background: #a09f9a; /* relleno amarillo dorado */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); /* sombra acorde al color */
+  transform: scale(1.2); /* zoom al pasar el ratón */
+}
+
+/* Activo */
+.nav-bullet.current {
+  background: #a7a7a7; /* mismo color que hover para el activo */
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+}
+
+

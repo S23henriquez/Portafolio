@@ -1,0 +1,109 @@
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mi Portafolio</title>
+  <link rel="stylesheet" href="Style.css">
+  </head>
+  <body>
+
+
+    <!-- Portada-->
+
+
+    <section class="Portada">
+
+      <h1>SAUL ALEJANDRO HENRIQUEZ DIAZ</h1>
+    <!-- <a href="#One" class="scroll-down">Desplázate hacia abajo</a>--> 
+        <div class="barra-mario">
+            <div class=" progreso"></div>
+        </div>
+
+
+     </section>
+
+      <!-- Mini barra de navegación en portada -->
+        <nav class="Navegacion" aria-label="section-nav">
+          <ul>
+            <li><a href="#One" class="nav-bullet" data-tooltip="Presentación"></a></li>
+            <li><a href="#Two" class="nav-bullet" data-tooltip="Habilidades"></a></li>
+            <li><a href="#Three" class="nav-bullet" data-tooltip="Proyectos"></a></li>
+            <li><a href="#Four" class="nav-bullet" data-tooltip="Certificados"></a></li>
+            <li><a href="#Five" class="nav-bullet" data-tooltip="Contacto"></a></li>
+          </ul>
+        </nav>
+
+
+
+    </section>
+    <!-- Sección 1: Presentación -->
+    <section id="One">
+      
+      <!-- Barra de opciones -->
+    <div class="opciones">
+      <button type="button" aria-label="Close contact menu" aria-controls="contact-menu" aria-expanded="true" class="menu-toggle x"></button>
+        <button onclick="cambiarTema()">🌙</button>
+    </div>
+
+      <!-- Contenido de la sección -->
+      <article class="titlee">
+        <h1>Who I'M</h1>
+        <p>Estudiante de 2º DAM</p>
+        <p>Soy estudiante de Desarrollo de Aplicaciones Multiplataforma.
+          Me gusta  entender cómo funcionan las cosas y aplicar ese conocimiento en el mundo de la tecnología. 
+          Me apasionan los deportes de contacto, que me han enseñado disciplina,esfuerzo,constancia, y también disfruto aprender sobre historia del mundo. 
+          Actualmente estoy enfocado en mejorar mis habilidades en Java, Base de Datos y Desarrollo Web, con el objetivo de crecer como desarrollador y participar en proyectos innovadores.</p>
+      </article>
+
+      <div class="foto">
+        <img src="img/Dembele_Ballon_D'Or.jpg">
+      </section>
+
+      
+
+    <!-- Sección 2: Habilidades -->
+    <section id="Two">
+      <h2>Habilidades</h2>
+      <ul>
+        <li>Java</li>
+        <li>PHP</li>
+        <li>SQL</li>
+        <li>HTML & CSS</li>
+      </ul>
+    </section>
+
+    <!-- Sección 3: Proyectos -->
+    <section id="Three">
+      <h2>Proyectos</h2>
+      <div class="proyecto">
+        <h3>Proyecto 1</h3>
+        <p> Proyecto 1: Página web de prueba </p>
+          <p>- Lenguajes: HTML, CSS</p>
+          <p>- Descripción: Primera web personal con secciones de presentación y contacto.</p>
+      </div>
+    </section>
+
+    <!-- Sección 4: Certificados -->
+    <section id="Four">
+      <h2>Certificados</h2>
+      <p>Aquí puedes poner enlaces o imágenes de tus certificados.</p>
+    </section>
+
+    <!-- Sección 5: Contacto -->
+    <section id="Five">
+      <h2>Contacto</h2>
+      <p>Email: shenriquez232@ejemplo.com</p>
+      <p>GitHub: <a href="https://github.com/tuusuario">tuusuario</a></p>
+    </section>
+
+    <nav aria-label="Navegacion" id="section-nav">
+      <ul>
+        <li><a href="#One" class="nav-bullet current"></a></li>
+        <li><a href="#Two" class="nav-bullet"></a></li>
+        <li><a href="#Three" class="nav-bullet"></a></li>
+        <li><a href="#Four" class="nav-bullet"></a></li>
+        <li><a href="#Five" class="nav-bullet"></a></li>
+      </ul>
+    </nav>
+  </body>
+  </html>
