@@ -56,7 +56,7 @@ body {
     Purple 10px, 
     Purple 20px
   );
-  animation: cargar 15s ;
+  animation: cargar 15s linear infinite;
 }
 
 /* Animación estilo "relleno" */
@@ -114,6 +114,7 @@ body {
   background: #FFD700; /* amarillo dorado */
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
   transform: scale(1.2);
+
 }
 
 /* Tooltip */
@@ -141,7 +142,7 @@ body {
 
 
 .Portada h1{
-    font-family: 'Pixel', Franklin 'Franklin Gothic Medium';
+    font-family: 'Pixel';
     background: rgb(255, 255, 255);
     color: #000000;
     padding: 10px;
@@ -162,6 +163,20 @@ body {
   border: 5px solid black;
 }
 
+#One p {
+  font-family: 'Pixel', Franklin 'Franklin Gothic Medium';
+  font-size: 20px;
+  background: #f9fcfa;
+  padding: 30px;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+  min-width: 120px;
+  border: 5px solid #a4a5a3
+
+}
+
 .foto img {
   width: 150px;
   height: auto;
@@ -174,8 +189,6 @@ body {
   transform: translateY(-10px);
   box-shadow: 15px 15px 15px rgba(0,0,0,0.6);
 }
-
-
 
 
 /* Secciones */
@@ -191,26 +204,45 @@ section {
 /* Títulos */
 h2 {
   margin-bottom: 15px;
-  color: #333;
+  color: #000000;
 }
 
 /* Listas de habilidades */
-#habilidades ul {
-  list-style: none;
-  padding: 0;
+
+
+#Two {
+  background: #72a54c;
+  color: rgb(0, 0, 0);
+  padding: 50px;
+  text-align: center;
+  border: 5px solid black;
 }
 
-#habilidades li {
-  background: #e0f7e9;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 5px;
+#Two ul {
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
+
+#Two li {
+  background: #f9fcfa;
+  padding: 30px;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+  min-width: 120px;
+  border: 5px solid #72a54c;
+}
+
 
 #Two details {
   margin: 10px 0;
   padding: 10px;
-  border: 2px solid #ccc;
+  border: 5px solid #ccc;
   border-radius: 8px;
   background: #f9f9f9;
   transition: all 0.3s ease;
@@ -225,12 +257,20 @@ h2 {
 
 #Two summary::-webkit-details-marker {
   display: none;
+   margin: 10px 0;
+  padding: 15px;
+  border-radius: 2.5px;
 }
 
 #Two details[open] {
   background: #e0f7e9; 
-  border-color: #72a54c;
+  border-color: #ccc;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 15px 15px 15px rgba(0,0,0,0.6);
+
 }
+
 
 /* Proyectos */
 .proyecto {
@@ -275,24 +315,26 @@ nav li {
   width: 5px;
   height: 15px;
   border-radius: 10%;
-  border: 2px solid #000000; /* borde rojo */
-  background: #bfbdbe;    /* fondo transparente por defecto */
+  border: 2px solid #000000; 
+  background: #bfbdbe;    
   cursor: pointer;
   display: block;
-  transition: all 0.3s ease; /* animaciones suaves */
+  transition: all 0.3s ease; 
 }
 
 /* Hover */
 .nav-bullet:hover {
-  background: #a09f9a; /* relleno amarillo dorado */
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); /* sombra acorde al color */
-  transform: scale(1.2); /* zoom al pasar el ratón */
+  /* relleno amarillo dorado */
+  background: #a09f9a; 
+  /* sombra acorde al color */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
+  /* zoom al pasar el ratón */
+  transform: scale(1.2); 
 }
 
 /* Activo */
 .nav-bullet.current {
-  background: #a7a7a7; /* mismo color que hover para el activo */
+  /* mismo color que hover para el activo */
+  background: #a7a7a7; 
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
 }
-
-
