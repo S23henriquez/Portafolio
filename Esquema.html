@@ -106,16 +106,59 @@
       </details>
     </section>
 
-    <!-- Sección 3: Proyectos -->
-    <section id="Three">
-      <h2>Proyectos</h2>
-      <div class="proyecto">
-        <h3>Proyecto 1</h3>
-        <p> Proyecto 1: Página web de prueba </p>
-          <p>- Lenguajes: HTML, CSS</p>
-          <p>- Descripción: Primera web personal con secciones de presentación y contacto.</p>
-      </div>
-    </section>
+<!-- Sección 3: Proyectos -->
+<section id="Three">
+  <h2>Proyectos</h2>
+
+  <div class="proyectos-grid">
+    <!-- Proyecto 1 -->
+    <div class="proyecto-card" onclick="abrirModal('modal1')">
+      <img src="img/Login.png" alt="Vista previa Proyecto 1">
+      <h3>Sistema de Facturación Taller</h3>
+    </div>
+
+    <!-- Proyecto 2 -->
+    <div class="proyecto-card" onclick="abrirModal('modal2')">
+      <img src="img/Inicio.png" alt="Vista previa Proyecto 2">
+      <h3>Mi Portafolio Web</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Proyecto 1 -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal('modal1')">&times;</span>
+    <h2>Sistema de Gestión de Facturas y Presupuestos</h2>
+    <p>
+      Desarrollé una aplicación web en PHP y MySQL para la gestión integral de un taller mecánico...
+    </p>
+    <img src="img/proyecto1_1.jpg" alt="Captura 1">
+    <img src="img/proyecto1_2.jpg" alt="Captura 2">
+  </div>
+</div>
+
+<!-- Modal Proyecto 2 -->
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal('modal2')">&times;</span>
+    <h2>Portafolio Personal</h2>
+    <p>
+      Página web personal con HTML, CSS y JS, incluyendo presentación, habilidades, proyectos y contacto.
+    </p>
+    <img src="img/proyecto2_1.jpg" alt="Captura 1">
+  </div>
+</div>
+
+<script>
+function abrirModal(id) {
+  document.getElementById(id).style.display = "block";
+}
+function cerrarModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+</script>
+
 
     <!-- Sección 4: Certificados -->
 <section id="Four">
