@@ -298,13 +298,13 @@ a {
 /* Sección Certificados */
 #Four {
   padding: 40px;
-  background: #f5f5f5;
+  background: #72a54c;
   text-align: center;
 }
 
 #Four h2 {
   margin-bottom: 30px;
-  color: #333;
+  color: #000000;
   font-size: 2em;
   letter-spacing: 1px;
 }
@@ -402,9 +402,3 @@ nav li {
   transform: scale(1.2); 
 }
 
-/* Activo */
-.nav-bullet.current {
-  /* mismo color que hover para el activo */
-  background: #a7a7a7; 
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
-}
