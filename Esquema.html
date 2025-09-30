@@ -15,9 +15,10 @@
 
       <h1>SAUL ALEJANDRO HENRIQUEZ DIAZ</h1>
     <!-- <a href="#One" class="scroll-down">Desplázate hacia abajo</a>--> 
-        <div class="barra-mario">
-            <div class=" progreso"></div>
-        </div>
+
+    <div class="opciones">
+      <button id="btnTema" aria-label="Cambiar tema">🌙</button>
+    </div>
 
 
      </section>
@@ -37,27 +38,19 @@
 
     </section>
     <!-- Sección 1: Presentación -->
-    <section id="One">
-      
-      <!-- Barra de opciones -->
-    <div class="opciones">
-      <button type="button" aria-label="Close contact menu" aria-controls="contact-menu" aria-expanded="true" class="menu-toggle x"></button>
-        <button onclick="cambiarTema()">🌙</button>
-    </div>
-
-      <!-- Contenido de la sección -->
-      <article class="titlee">
-        <h1>Who I'M</h1>
+   <section id="One">
+      <div class="one-container">
+        <article class="titlee">
+          <h1>Who I'M</h1>
           <p>Soy estudiante de Desarrollo de Aplicaciones Multiplataforma. Estudiante de 2º DAM</p>
-           <p>Me apasionan los deportes de contacto, que me han enseñado disciplina,esfuerzo,constancia, y también disfruto aprender sobre historia del mundo. 
-            Actualmente estoy enfocado en mejorar mis habilidades en Java, Base de Datos y Desarrollo Web, con el objetivo de crecer como desarrollador y participar en proyectos innovadores.</p>
-      </article>
+          <p>Me apasionan los deportes de contacto, que me han enseñado disciplina, esfuerzo, constancia, y también disfruto aprender sobre historia del mundo. Actualmente estoy enfocado en mejorar mis habilidades en Java, Base de Datos y Desarrollo Web, con el objetivo de crecer como desarrollador y participar en proyectos innovadores.</p>
+        </article>
 
-      <div class="foto">
-        <img src="img/Dembele_Ballon_D'Or.jpg">
-      </section>
-
-      
+        <div class="foto">
+          <img src="img/Dembele_Ballon_D'Or.jpg" alt="Foto personal">
+        </div>
+      </div>
+    </section>
 
     <!-- Sección 2: Habilidades -->
     <section id="Two">
@@ -73,6 +66,8 @@
           <li>SQL</li>
           <li>PHP</li>
           <li>Visual Basic.NET</li>
+          <li>JavaScript</li>
+        </ul>
       </details>
 
       <details>
@@ -81,7 +76,7 @@
           <li>Administracion de Windows</li>
           <li>Administracion de GNU/Linux</li>
           <li>Administracion de MacOS</li>
-
+        </ul>
       </details>
 
       <details>
@@ -89,6 +84,7 @@
         <ul>
           <li>Photoshop</li>
           <li>Premier</li>
+        </ul>
       </details>
 
       <details>
@@ -103,19 +99,63 @@
           <li>Responsable</li>
           <li>Puntual</li>
           <li>Activo</li>
+        </ul>
       </details>
     </section>
 
-    <!-- Sección 3: Proyectos -->
-    <section id="Three">
-      <h2>Proyectos</h2>
-      <div class="proyecto">
-        <h3>Proyecto 1</h3>
-        <p> Proyecto 1: Página web de prueba </p>
-          <p>- Lenguajes: HTML, CSS</p>
-          <p>- Descripción: Primera web personal con secciones de presentación y contacto.</p>
-      </div>
-    </section>
+<!-- Sección 3: Proyectos -->
+<section id="Three">
+  <h2>Proyectos</h2>
+
+  <div class="proyectos-grid">
+    <!-- Proyecto 1 -->
+    <div class="proyecto-card" onclick="abrirModal('modal1')">
+      <img src="img/Login.png" alt="Vista previa Proyecto 1">
+      <h3>Sistema de Facturación Taller</h3>
+    </div>
+
+    <!-- Proyecto 2 -->
+    <div class="proyecto-card" onclick="abrirModal('modal2')">
+      <img src="img/Inicio.png" alt="Vista previa Proyecto 2">
+      <h3>Its Me HENRIQUEZ</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Proyecto 1 -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal('modal1')">&times;</span>
+    <h2>Sistema de Gestión de Facturas y Presupuestos</h2>
+    <p>
+      Desarrollé una aplicación web en PHP y MySQL para la gestión integral de un taller mecánico...
+    </p>
+    <img src="img/proyecto1_1.jpg" alt="Captura 1">
+    <img src="img/proyecto1_2.jpg" alt="Captura 2">
+  </div>
+</div>
+
+<!-- Modal Proyecto 2 -->
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal('modal2')">&times;</span>
+    <h2>Portafolio Personal</h2>
+    <p>
+      Página web personal con HTML, CSS y JS, incluyendo presentación, habilidades, proyectos y contacto.
+    </p>
+    <img src="img/proyecto2_1.jpg" alt="Captura 1">
+  </div>
+</div>
+
+<script>
+function abrirModal(id) {
+  document.getElementById(id).style.display = "block";
+}
+function cerrarModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+</script>
+
 
     <!-- Sección 4: Certificados -->
 <section id="Four">
@@ -136,7 +176,7 @@
     <!-- Sección 5: Contacto -->
     <section id="Five">
       <h2>Contacto</h2>
-      <p>Email: shenriquez232@ejemplo.com</p>
+      <p>Email: shenriquez232@gmail.com</p>
       <p>GitHub: <a href="https://github.com/S23henriquez">S23henriquez</a></p>
     </section>
 
@@ -151,3 +191,27 @@
     </nav>
   </body>
   </html>
+
+<!-- Boton de Tema Calro/Oscuro -->
+<script>
+// Cambiar tema claro/oscuro
+const btnTema = document.getElementById('btnTema');
+btnTema.addEventListener('click', () => {
+  document.body.classList.toggle('tema-oscuro');
+  btnTema.textContent = document.body.classList.contains('tema-oscuro') ? "☀️" : "🌙";
+});
+
+// Nav-bullets activas según scroll
+const bullets = document.querySelectorAll('.nav-bullet');
+const sections = document.querySelectorAll('section');
+
+window.addEventListener('scroll', () => {
+  let scrollPos = window.scrollY + window.innerHeight / 2;
+  sections.forEach((section, index) => {
+    if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+      bullets.forEach(b => b.classList.remove('current'));
+      bullets[index].classList.add('current');
+    }
+  });
+});
+</script>
