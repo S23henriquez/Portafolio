@@ -6,11 +6,7 @@
   <link rel="stylesheet" href="Style.css">
   </head>
   <body>
-
-
     <!-- Portada-->
-
-
     <section class="Portada">
 
       <h1>SAUL ALEJANDRO HENRIQUEZ DIAZ</h1>
@@ -43,7 +39,8 @@
         <article class="titlee">
           <h1>Who I'M</h1>
           <p>Soy estudiante de Desarrollo de Aplicaciones Multiplataforma. Estudiante de 2º DAM</p>
-          <p>Me apasionan los deportes de contacto, que me han enseñado disciplina, esfuerzo, constancia, y también disfruto aprender sobre historia del mundo. Actualmente estoy enfocado en mejorar mis habilidades en Java, Base de Datos y Desarrollo Web, con el objetivo de crecer como desarrollador y participar en proyectos innovadores.</p>
+          <p>Me apasionan los deportes de contacto, que me han enseñado disciplina, esfuerzo, constancia, y también disfruto aprender sobre historia del mundo.</p>
+          <p>Actualmente estoy enfocado en mejorar mis habilidades en Java, Base de Datos y Desarrollo Web, con el objetivo de crecer como desarrollador y participar en proyectos innovadores.</p>
         </article>
 
         <div class="foto">
@@ -140,9 +137,7 @@
   <div class="modal-content">
     <span class="cerrar" onclick="cerrarModal('modal2')">&times;</span>
     <h2>Portafolio Personal</h2>
-    <p>
-      Página web personal con HTML, CSS y JS, incluyendo presentación, habilidades, proyectos y contacto.
-    </p>
+    <p>Página web personal con HTML, CSS y JS, incluyendo presentación, habilidades, proyectos y contacto.</p>
     <img src="img/proyecto2_1.jpg" alt="Captura 1">
   </div>
 </div>
@@ -178,7 +173,10 @@ function cerrarModal(id) {
       <h2>Contacto</h2>
       <p>Email: shenriquez232@gmail.com</p>
       <p>GitHub: <a href="https://github.com/S23henriquez">S23henriquez</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/saul-alejandro-henriquez-diaz-8b4b79232/">Saul Alejandro Henriquez Diaz</a></p>
+      <p><a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" class="pdf-resumen" target="_blank" download>Resumen</a></p>
     </section>
+
 
     <nav aria-label="Navegacion" id="section-nav">
       <ul>
@@ -190,7 +188,13 @@ function cerrarModal(id) {
       </ul>
     </nav>
 
-    
+    <footer id="Footer">
+      <p>© 2025 Saul Alejandro Henriquez Diaz.</p>
+      <p>Todos los derechos reservados.</p>
+      <p>Programar no es memorizar; es aprender a resolver problemas paso a paso.</p>
+    </footer>
+
+
   </body>
   </html>
 
@@ -216,4 +220,25 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+
+// Detectar sección visible y aplicar efecto fade
+const sectionsFade = document.querySelectorAll("section");
+
+function actualizarSeccionActiva() {
+  const scrollPos = window.scrollY + window.innerHeight / 2;
+  sectionsFade.forEach((sec) => sec.classList.add("inactive")); // Todas inactivas
+  sectionsFade.forEach((sec) => {
+    if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+      sec.classList.remove("inactive");
+      sec.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", actualizarSeccionActiva);
+
+// Inicializamos la primera sección como activa
+actualizarSeccionActiva();
+
 </script>

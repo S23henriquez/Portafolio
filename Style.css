@@ -11,7 +11,7 @@
 
 /* Variables para tema claro y oscuro */
 :root {
-  --color-fondofondo: #6b88fe;
+  --color-fondoAtras: #6b88fe;
   --color-fondo: #f9fafb;
   --color-texto: #111827;
   --color-principal: #2563eb;
@@ -42,7 +42,7 @@ body.tema-oscuro {
 
 /* Aplica variables */
 body {
-  background-color: var(--color-fondofondo);
+  background-color: var(--color-fondoAtras);
   color: var(--color-texto);
 }
 section {
@@ -78,8 +78,11 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: var(--color-fondofondo);  
+  background: var(--color-fondoAtras);  
   color: #111827;
+  scroll-behavior: smooth; 
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory; 
 }
 
 .Portada {
@@ -235,7 +238,6 @@ nav li {
   color: var(--color-texto);
   padding: 50px;
   text-align: center;
-  border: 5px solid var(--color-border);
 }
 
 #One p {
@@ -298,14 +300,15 @@ nav li {
 
 /* Secciones */
 section {
-  padding: 50px 40px;
-  margin: 40px auto;
-  width: 85%;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+  height: 100vh; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;     
+  scroll-snap-align: start; 
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  opacity: 1;
 }
 
 
@@ -313,6 +316,17 @@ section:hover {
   transform: translateY(-5px);
   box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
 }
+
+section.inactive {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* Títulos */
 h2 {
@@ -489,28 +503,31 @@ a {
 /* Sección Certificados */
 #Four {
   padding: 40px;
-  background: #fff;
+  background: var(--color-fondo); /* Fondo de la sección */
+  color: var(--color-texto);
   text-align: center;
+  transition: background 0.3s, color 0.3s;
 }
 
 #Four h2 {
   margin-bottom: 30px;
-  color: #000000;
+  color: var(--color-texto);
   font-size: 2em;
   letter-spacing: 1px;
 }
 
-
+/* Carta del certificado */
 .certificado-card {
   display: inline-block;
-  background: #fff;
+  background: var(--color-card); /* Diferencia con el fondo de la sección */
+  color: var(--color-texto);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   overflow: hidden;
   max-width: 600px;
   margin: 20px auto;
   text-align: left;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
 }
 
 .certificado-card:hover {
@@ -524,38 +541,94 @@ a {
 
 .certificado-content h3 {
   margin-top: 0;
-  color: #2563eb; 
+  color: var(--color-principal);
 }
 
 .certificado-content p {
   margin-bottom: 15px;
-  color: #111827;
+  color: var(--color-texto);
 }
 
+/* Botón de descarga */
 .btn-descargar {
   display: block;
   width: calc(100% - 40px);
   margin: 0 20px 20px 20px;
   padding: 10px 0;
   text-align: center;
-  background: #2563eb;
-  color: #fff;
+  background: var(--color-principal);
+  color: var(--color-card);
   font-weight: bold;
   border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-descargar:hover {
+  background: var(--color-hover);
+}
+
+#Five {
+  background: var(--color-card); /* Contraste con el fondo general */
+  color: var(--color-texto);
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Enlaces dentro de #Five */
+#Five a {
+  color: var(--color-principal);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+#Five a:hover {
+  color: var(--color-hover);
+  text-decoration: underline;
+}
+
+/* PDF*/
+#Five a.pdf-resumen {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: var(--color-principal);
+  color: #fff;
+  border-radius: 8px;
   text-decoration: none;
   transition: background 0.3s;
 }
 
-.btn-descargar:hover {
-  background: #1e40af;
+#Five a.pdf-resumen:hover {
+  background: var(--color-hover);
 }
 
+
+
+
+
 /* Estilo del pie de página */
-footer {
+
+#Footer {
+  background: var(--color-fondoAtras); 
+  color: var(--color-texto);           
   text-align: center;
   padding: 20px;
+  font-size: 0.9em;
+  border-top: 2px solid var(--color-borde);
+}
+
+#Footer p {
+  margin: 5px 0;
+}
+
+/* Ajuste para tema oscuro */
+body.tema-oscuro #Footer {
   background: var(--color-card);
   color: var(--color-texto);
-  border-top: 2px solid var(--color-border);
-  font-size: 0.9em;
+  border-top-color: var(--color-principal);
 }
+
