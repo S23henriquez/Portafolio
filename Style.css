@@ -550,4 +550,12 @@ a {
   background: #1e40af;
 }
 
-
+/* Estilo del pie de página */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--color-card);
+  color: var(--color-texto);
+  border-top: 2px solid var(--color-border);
+  font-size: 0.9em;
+}
