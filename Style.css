@@ -7,7 +7,61 @@
   padding: 0;
 }
 
-/* Estilo general */
+/* Declaracion de variables */
+:root {
+  --color-fondo: #f9fafb;
+  --color-texto: #111827;
+  --color-principal: #2563eb;
+  --color-secundario: #60a5fa;
+  --color-hover: #1e40af;
+  --color-card: #fff;
+  --color-border: #ddd;
+}
+
+body.tema-oscuro {
+  --color-fondo: #111827;
+  --color-texto: #f9fafb;
+  --color-principal: #60a5fa;
+  --color-secundario: #2563eb;
+  --color-hover: #93c5fd;
+  --color-card: #1f2937;
+  --color-border: #374151;
+}
+
+
+/* Aplica variables */
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+section {
+  background-color: var(--color-card);
+  border-color: var(--color-border);
+}
+
+.nav-bullet {
+  border-color: var(--color-principal);
+}
+
+.nav-bullet.current, .nav-bullet:hover {
+  background: var(--color-principal);
+  box-shadow: 0 0 15px var(--color-principal);
+}
+
+a, .btn-descargar {
+  background: var(--color-principal);
+  color: var(--color-card);
+}
+
+a:hover, .btn-descargar:hover {
+  background: var(--color-hover);
+}
+
+
+
+
+
+
 /* Estilo general */
 body {
   font-family: Arial, sans-serif;
@@ -57,17 +111,18 @@ body {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 2px solid #2563eb; 
+  border: 2px solid var(--color-principal);
   background: transparent;
   cursor: pointer;
   display: block;
-  transition: all 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 /* Efecto hover y activo */
 .nav-bullet.current {
-  background: #2563eb;
-  box-shadow: 0 0 20px rgba(37,99,235,0.9);
+  background: var(--color-principal);
+  box-shadow: 0 0 15px var(--color-principal);
   transform: scale(1.5);
 }
 
@@ -132,13 +187,10 @@ nav li {
 
 /* Hover */
 .nav-bullet:hover {
-  /* relleno amarillo dorado */
-  background: #a09f9a; 
-  /* sombra acorde al color */
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
-  /* zoom al pasar el ratón */
-  transform: scale(1.2); 
+  transform: scale(1.3);
+  box-shadow: 0 0 10px var(--color-principal);
 }
+
 
 
 
@@ -156,28 +208,67 @@ nav li {
 
 /* Encabezado principal */
 
+@media (max-width: 900px) {
+  #One .one-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  #One .foto {
+    margin-top: 20px;
+  }
+}
 
 #One {
-  background: #fff;
-  color: rgb(0, 0, 0);
+  background: var(--color-card);
+  color: var(--color-texto);
   padding: 50px;
   text-align: center;
-  border: 5px solid black;
+  border: 5px solid var(--color-border);
 }
 
 #One p {
   font-family: 'Pixel', Franklin 'Franklin Gothic Medium';
   font-size: 20px;
-  background: #f9fcfa;
+  background: var(--color-card);       
   padding: 30px;
   border-radius: 5px;
   margin: 10px 0;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   text-align: center;
   min-width: 120px;
-  border: 5px solid #a4a5a3
-
+  border: 5px solid var(--color-border); 
 }
+
+#One .one-container {
+  display: flex;
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 40px; 
+}
+
+#One .titlee {
+  flex: 1; 
+}
+
+#One .foto {
+  flex: 1;
+  text-align: center;
+}
+
+#One .foto img {
+  max-width: 100%; 
+  height: auto;
+  border-radius: 10%;
+  border: 3px solid gold;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#One .foto img:hover {
+  transform: translateY(-10px);
+  box-shadow: 15px 15px 15px rgba(0,0,0,0.6);
+}
+
 
 .foto img {
   width: 150px;
