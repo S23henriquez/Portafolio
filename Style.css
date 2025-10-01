@@ -285,7 +285,7 @@ nav li {
 
 
 .foto img {
-  width: 150px;
+  width: 550px;
   height: auto;
   border-radius: 10%;
   margin-top: 20px;
@@ -394,6 +394,26 @@ h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transform: translateY(-3px);
 }
+
+
+.tecnologias-futuras {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.tecnologias-futuras li {
+  margin: 8px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.tecnologias-futuras li::before {
+  margin-right: 8px;
+  color: var(--color-principal);
+  font-weight: bold;
+}
+
 
 /* Proyectos */
 .proyecto {
@@ -519,7 +539,7 @@ a {
 /* Carta del certificado */
 .certificado-card {
   display: inline-block;
-  background: var(--color-card); /* Diferencia con el fondo de la sección */
+  background: var(--color-card); 
   color: var(--color-texto);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
@@ -529,6 +549,16 @@ a {
   text-align: left;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
 }
+
+.img-certificado {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 
 .certificado-card:hover {
   transform: translateY(-5px);
@@ -569,13 +599,79 @@ a {
 }
 
 #Five {
-  background: var(--color-card); /* Contraste con el fondo general */
+  background: var(--color-card); 
   color: var(--color-texto);
   padding: 30px;
   text-align: center;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+
+#Five.form-contacto{
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--color-card);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  text-align: left;
+}
+
+/* Campos del formulario */
+.form-contacto .campo {
+  margin-bottom: 20px;
+}
+
+.form-contacto label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--color-texto);
+}
+
+.form-contacto input,
+.form-contacto textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 15px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-contacto input:focus,
+.form-contacto textarea:focus {
+  border-color: var(--color-principal);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  outline: none;
+}
+
+/* Textarea */
+.form-contacto textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Botón enviar */
+.form-contacto .btn-enviar {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-principal);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.form-contacto .btn-enviar:hover {
+  background: var(--color-hover);
+  transform: scale(1.03);
+}
+
 
 /* Enlaces dentro de #Five */
 #Five a {
@@ -605,9 +701,6 @@ a {
 #Five a.pdf-resumen:hover {
   background: var(--color-hover);
 }
-
-
-
 
 
 /* Estilo del pie de página */
