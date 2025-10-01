@@ -285,7 +285,7 @@ nav li {
 
 
 .foto img {
-  width: 550px;
+  width: 500px;
   height: auto;
   border-radius: 10%;
   margin-top: 20px;
@@ -396,23 +396,6 @@ h2 {
 }
 
 
-.tecnologias-futuras {
-  margin-top: 10px;
-  padding-left: 20px;
-}
-
-.tecnologias-futuras li {
-  margin: 8px 0;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-}
-
-.tecnologias-futuras li::before {
-  margin-right: 8px;
-  color: var(--color-principal);
-  font-weight: bold;
-}
 
 
 /* Proyectos */
@@ -539,7 +522,7 @@ a {
 /* Carta del certificado */
 .certificado-card {
   display: inline-block;
-  background: var(--color-card); 
+  background: var(--color-card); /* Diferencia con el fondo de la sección */
   color: var(--color-texto);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
@@ -549,16 +532,6 @@ a {
   text-align: left;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
 }
-
-.img-certificado {
-  max-width: 50%;
-  height: auto;
-  display: block;
-  margin: 10px auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
 
 .certificado-card:hover {
   transform: translateY(-5px);
@@ -701,6 +674,9 @@ a {
 #Five a.pdf-resumen:hover {
   background: var(--color-hover);
 }
+
+
+
 
 
 /* Estilo del pie de página */
