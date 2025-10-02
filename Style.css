@@ -37,10 +37,12 @@ body.tema-oscuro {
   --color-li-text: #f9fafb;
   --color-card-open: #374151;
   --color-borde: #60a5fa;
+  --color-fondo-seccion: #111827;
+
 }
 
 
-/* Aplica variables */
+/* Aplicar variables */
 body {
   background-color: var(--color-fondoAtras);
   color: var(--color-texto);
@@ -56,8 +58,7 @@ section {
 
 .nav-bullet.current, .nav-bullet:hover {
   background: var(--color-principal);
-  box-shadow: 0 0 15px var(--color-principal);
-}
+  box-shadow: 0 0 15px var(--color-principal);}
 
 a, .btn-descargar {
   background: var(--color-principal);
@@ -67,10 +68,6 @@ a, .btn-descargar {
 a:hover, .btn-descargar:hover {
   background: var(--color-hover);
 }
-
-
-
-
 
 
 /* Estilo general */
@@ -83,6 +80,7 @@ body {
   scroll-behavior: smooth; 
   overflow-y: scroll;
   scroll-snap-type: y mandatory; 
+  overflow-x: hidden;
 }
 
 .Portada {
@@ -301,7 +299,7 @@ nav li {
 /* Secciones */
 section {
   height: 100vh; 
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center; 
@@ -309,6 +307,7 @@ section {
   scroll-snap-align: start; 
   transition: opacity 0.7s ease, transform 0.7s ease;
   opacity: 1;
+  box-sizing: border-box;
 }
 
 
@@ -506,11 +505,13 @@ a {
 /* Sección Certificados */
 #Four {
   padding: 40px;
-  background: var(--color-fondo); /* Fondo de la sección */
+  background: var(--color-fondo); 
   color: var(--color-texto);
   text-align: center;
   transition: background 0.3s, color 0.3s;
 }
+
+
 
 #Four h2 {
   margin-bottom: 30px;
@@ -519,18 +520,32 @@ a {
   letter-spacing: 1px;
 }
 
+#Four .certificados-grid {
+  display: flex;
+  flex-wrap: wrap;       /* para que baje a otra fila si no cabe */
+  gap: 20px;             /* espacio entre tarjetas */
+  justify-content: center; /* centra las tarjetas horizontalmente */
+  align-items: flex-start; /* alinea la parte superior de las tarjetas */
+  padding: 20px 0;
+}
+
 /* Carta del certificado */
-.certificado-card {
-  display: inline-block;
-  background: var(--color-card); /* Diferencia con el fondo de la sección */
+#Four .certificado-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-card); 
   color: var(--color-texto);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   overflow: hidden;
-  max-width: 600px;
-  margin: 20px auto;
-  text-align: left;
+  max-width: 300px;
+  height: 300px;
+  width: 100%;
+  margin: 0px ;
+  text-align: center;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+  overflow: visible;
 }
 
 .certificado-card:hover {
@@ -542,7 +557,21 @@ a {
   padding: 20px;
 }
 
+.certificado-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+
+
 .certificado-content h3 {
+  margin-top: 0;
+  color: var(--color-principal);
+}
+
+.certificado-content h4 {
   margin-top: 0;
   color: var(--color-principal);
 }
@@ -565,6 +594,7 @@ a {
   border-radius: 10px;
   text-decoration: none;
   transition: background 0.3s, color 0.3s;
+  margin-top: 15px;
 }
 
 .btn-descargar:hover {
@@ -579,6 +609,8 @@ a {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+
 
 
 #Five.form-contacto{

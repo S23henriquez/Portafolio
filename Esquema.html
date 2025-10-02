@@ -100,7 +100,7 @@
         </ul>
       </details>
 
-      <details open>
+      <details>
         <summary>Lo que viene</summary>
         <p>Actualmente estoy aprendiendo conocimientos en:</p>
         <ul class="tecnologias-futuras">
@@ -163,26 +163,27 @@ function cerrarModal(id) {
 
 
     <!-- Sección 4: Certificados -->
-<section id="certificados">
+<section id="Four">
   <h2>Certificados / Insignias</h2>
+  <div class="certificados-grid">
+    <div class="certificado-card">
+      <div class="certificado-content">
+        <h4>Open Webinars</h4>
+        <embed src="img/certificado_curso_online_de_introducción_a_cloud_computing.pdf" type="application/pdf">
+        <a href="img/certificado_curso_online_de_introducción_a_cloud_computing.pdf" class="btn-descargar" download>Descargar</a>
+      </div>
+    </div>
 
-  <!-- Certificado 1 -->
-  <div class="certificado-card">
-    <figure class="certificado-content">
-      <figcaption>
-        <h3>Open Webinars</h3>
-        <p>Curso Online de Introducción a Cloud Computing</p>
-      </figcaption>
-      <embed src="img/certificado_curso_online_de_introducción_a_cloud_computing.pdf"
-             type="application/pdf" class="certificado-pdf"
-             title="Certificado Cloud Computing">
-    </figure>
-    <a href="img/certificado_curso_online_de_introducción_a_cloud_computing.pdf" 
-       class="btn-descargar" target="_blank" download="Certificado_Cloud_Computing.pdf">
-       📥 Descargar Certificado
-    </a>
+    <div class="certificado-card">
+      <div class="certificado-content">
+        <h4>Prompt Design in Vertex AI Skill Badge</h4>
+        <embed src="img/prompt-design-in-vertex-ai-skill-badge.pdf" type="application/pdf">
+        <a href="img/prompt-design-in-vertex-ai-skill-badge.pdf" class="btn-descargar" download>Descargar</a>
+      </div>
+    </div>
+
+    <!-- Agrega más certificados aquí -->
   </div>
-
 </section>
 
 
@@ -240,18 +241,31 @@ btnTema.addEventListener('click', () => {
 
 // Nav-bullets activas según scroll
 const bullets = document.querySelectorAll('.nav-bullet');
-const sections = document.querySelectorAll('section');
 
-window.addEventListener('scroll', () => {
-  let scrollPos = window.scrollY + window.innerHeight / 2;
-  sections.forEach((section, index) => {
-    if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-      bullets.forEach(b => b.classList.remove('current'));
-      bullets[index].classList.add('current');
-    }
+bullets.forEach((bullet) => {
+  bullet.addEventListener('click', (e) => {
+    e.preventDefault();
+    bullets.forEach(b => b.classList.remove('current'));
+    bullet.classList.add('current');
+
+    const targetId = bullet.getAttribute('href').substring(1); // Quita #
+    const targetSection = document.getElementById(targetId);
+    targetSection.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
+// Actualizar bullet activo al hacer scroll
+window.addEventListener('scroll', () => {
+  const scrollPos = window.scrollY + window.innerHeight / 2;
+  bullets.forEach((bullet) => {
+    const targetId = bullet.getAttribute('href').substring(1);
+    const section = document.getElementById(targetId);
+    if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+      bullets.forEach(b => b.classList.remove('current'));
+      bullet.classList.add('current');
+    }
+  });
+});
 
 // Detectar sección visible y aplicar efecto fade
 const sectionsFade = document.querySelectorAll("section");
