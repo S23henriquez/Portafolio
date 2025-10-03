@@ -10,8 +10,7 @@
     <section class="Portada">
 
       <h1>SAUL ALEJANDRO HENRIQUEZ DIAZ</h1>
-    <!-- <a href="#One" class="scroll-down">Desplázate hacia abajo</a>--> 
-
+     
     <div class="opciones">
       <button id="btnTema" aria-label="Cambiar tema">🌙</button>
     </div>
@@ -64,7 +63,8 @@
           <li>PHP</li>
           <li>Laravel</li>
           <li>Visual Basic.NET</li>
-          <li>JavaScript</li>
+          <li>Git y GitHub</li>
+
         </ul>
       </details>
 
@@ -106,6 +106,7 @@
         <ul class="tecnologias-futuras">
           <li>Kotlin</li>
           <li>Android Studio</li>
+          <li>JavaScript</li>
         </ul>
   </details>
     </section>
@@ -133,12 +134,36 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <span class="cerrar" onclick="cerrarModal('modal1')">&times;</span>
-    <h2>Sistema de Gestión de Facturas y Presupuestos</h2>
-    <p>
-      Desarrollé una aplicación web en PHP y MySQL para la gestión integral de un taller mecánico...
-    </p>
-    <img src="img/proyecto1_1.jpg" alt="Captura 1">
-    <img src="img/proyecto1_2.jpg" alt="Captura 2">
+    
+    <h2 class="modal-title">Sistema de Gestión de Facturas y Presupuestos</h2>
+    
+    <div class="modal-body">
+      <p>
+        Desarrollé una aplicación web en <strong>PHP con MySQL</strong> para gestionar clientes, 
+        sus vehículos, facturas y presupuestos de un taller.  
+        Este sistema facilita la organización de la información y automatiza procesos clave.
+      </p>
+      
+      <ul class="modal-list">
+        <li>Registrar clientes y asociarles múltiples coches.</li>
+        <li>Crear facturas o presupuestos seleccionando al cliente y vehículo correspondiente.</li>
+        <li>Añadir servicios desde un catálogo o de manera manual, con posibilidad de aplicar descuentos.</li>
+        <li>Calcular automáticamente subtotales, IVA y total.</li>
+        <li>Generar documentos en PDF con todos los datos del cliente, vehículo y servicios.</li>
+        <li>Gestión de usuarios con roles y autenticación segura con contraseñas encriptadas.</li>
+      </ul>
+
+      <p>
+        Este es un proyecto que utilizo a nivel personal y familiar para mejorar la gestión 
+        de un taller de confianza. Actualmente sigo <em>mejorándolo</em> con nuevas funcionalidades 
+        y optimizaciones.
+      </p>
+    </div>
+
+    <!-- Imagen destacada -->
+    <div class="modal-image">
+      <img src="img/Inicio.jpg" alt="Captura del sistema">
+    </div>
   </div>
 </div>
 
@@ -146,11 +171,26 @@
 <div id="modal2" class="modal">
   <div class="modal-content">
     <span class="cerrar" onclick="cerrarModal('modal2')">&times;</span>
+
     <h2>Portafolio Personal</h2>
-    <p>Página web personal con HTML, CSS y JS, incluyendo presentación, habilidades, proyectos y contacto.</p>
-    <img src="img/proyecto2_1.jpg" alt="Captura 1">
+
+    <p>
+      Desarrollé una página web personal utilizando <strong>HTML, CSS </strong> y JavaScript, 
+      en la cual muestro información sobre mí, mis habilidades técnicas, proyectos realizados 
+      y una sección de contacto interactiva.
+    </p>
+
+    <ul>
+      <li>Sección de presentación con un diseño moderno y responsivo.</li>
+      <li>Listado de habilidades técnicas con íconos representativos.</li>
+      <li>Galería de proyectos con modales explicativos.</li>
+      <li>Formulario de contacto funcional con validación.</li>
+      <li>Soporte para tema claro/oscuro.</li>
+    </ul>
+    </a>
   </div>
 </div>
+
 
 <script>
 function abrirModal(id) {
@@ -206,7 +246,7 @@ function cerrarModal(id) {
 
       <p>GitHub: <a href="https://github.com/S23henriquez">S23henriquez</a></p>
       <p>LinkedIn: <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/">Saul Alejandro Henriquez Diaz</a></p>
-      <p><a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" class="pdf-resumen" target="_blank" download>Resumen</a></p>
+      <p><a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" class="pdf-resumen" target="_blank" download>CV</a></p>
     </section>
 
 
@@ -223,12 +263,13 @@ function cerrarModal(id) {
     <footer id="Footer">
       <p>© 2025 Saul Alejandro Henriquez Diaz.</p>
       <p>Todos los derechos reservados.</p>
-      <p>Programar no es memorizar; es aprender a resolver problemas paso a paso.</p>
+      <p>Intento aprender que programar no es memorizar; es aprender a resolver problemas paso a paso.</p>
     </footer>
 
 
   </body>
   </html>
+
 
 <!-- Boton de Tema Calro/Oscuro -->
 <script>
@@ -248,7 +289,8 @@ bullets.forEach((bullet) => {
     bullets.forEach(b => b.classList.remove('current'));
     bullet.classList.add('current');
 
-    const targetId = bullet.getAttribute('href').substring(1); // Quita #
+     // Obtener ID sin '#'
+    const targetId = bullet.getAttribute('href').substring(1);
     const targetSection = document.getElementById(targetId);
     targetSection.scrollIntoView({ behavior: 'smooth' });
   });
@@ -272,7 +314,10 @@ const sectionsFade = document.querySelectorAll("section");
 
 function actualizarSeccionActiva() {
   const scrollPos = window.scrollY + window.innerHeight / 2;
-  sectionsFade.forEach((sec) => sec.classList.add("inactive")); // Todas inactivas
+
+
+  // Añadir clase inactive a todas las secciones
+  sectionsFade.forEach((sec) => sec.classList.add("inactive")); 
   sectionsFade.forEach((sec) => {
     if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
       sec.classList.remove("inactive");
