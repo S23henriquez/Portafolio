@@ -716,14 +716,13 @@ a {
 
 /* Enlaces dentro de #Five */
 #Five a {
-  color: var(--color-principal);
+  color: #ccc;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 #Five a:hover {
-  color: var(--color-hover);
   text-decoration: underline;
 }
 
@@ -742,6 +741,7 @@ a {
 #Five a.pdf-resumen:hover {
   background: var(--color-hover);
 }
+
 
 
 /* Estilo del pie de página */
