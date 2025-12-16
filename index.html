@@ -128,6 +128,20 @@
       <h3>Its Me HENRIQUEZ</h3>
     </div>
   </div>
+
+
+    <!-- Proyecto 3 -->
+    <div class="proyecto-card" onclick="abrirModal('modal3')">
+      <img src="img/proyecto3.png" alt="Vista previa Proyecto 3">
+      <h3>Aplicación Android - Penaltis Multiplayer</h3>
+    </div>
+
+    <!-- Proyecto 4 -->
+    <div class="proyecto-card" onclick="abrirModal('modal4')">
+      <img src="img/proyecto4.png" alt="Vista previa Proyecto 4">
+      <h3>Gestor de Tareas con Firebase</h3>
+    </div>
+
 </section>
 
 <!-- Modal Proyecto 1 -->
@@ -190,6 +204,68 @@
     </a>
   </div>
 </div>
+
+
+<!-- Modal Proyecto 3 -->
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal('modal3')">&times;</span>
+
+    <h2>Juego de Penaltis Multijugador (Android)</h2>
+
+    <p>
+      Desarrollo de una aplicación Android en <strong>Kotlin</strong> que simula un juego
+      de penaltis entre dos jugadores (Host y Guest), con lógica de turnos y resultado final.
+    </p>
+
+    <ul>
+      <li>Comunicación entre jugadores en tiempo real.</li>
+      <li>Sistema de turnos y control de marcador.</li>
+      <li>Interfaz animada con efectos visuales.</li>
+      <li>Gestión de estados de juego (victoria, derrota, empate).</li>
+    </ul>
+
+    <p>
+      Este proyecto me ha permitido reforzar conceptos clave de lógica de juego,
+      control de estados y desarrollo Android.
+    </p>
+
+    <div class="modal-image">
+      <img src="img/proyecto3_detalle.png" alt="Captura del juego de penaltis">
+    </div>
+  </div>
+</div>
+
+  <!-- Modal Proyecto 4 -->
+<div id="modal4" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarModal('modal4')">&times;</span>
+
+    <h2>Aplicación To-Do List con Firebase</h2>
+
+    <p>
+      Aplicación Android desarrollada con <strong>Kotlin y Firebase</strong> para la
+      gestión de tareas personales con autenticación de usuarios.
+    </p>
+
+    <ul>
+      <li>Registro e inicio de sesión con Firebase Authentication.</li>
+      <li>Persistencia de datos en Firebase Firestore.</li>
+      <li>CRUD completo de tareas.</li>
+      <li>Interfaz clara y orientada a la usabilidad.</li>
+    </ul>
+
+    <p>
+      Este proyecto consolida mis conocimientos en aplicaciones móviles conectadas
+      a servicios en la nube.
+    </p>
+
+    <div class="modal-image">
+      <img src="img/proyecto4_detalle.png" alt="Captura gestor de tareas">
+    </div>
+  </div>
+</div>
+
 
 
 <script>
