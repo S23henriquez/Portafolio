@@ -423,6 +423,11 @@ h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Añade estas líneas para mejor visual */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .proyecto-card img {
