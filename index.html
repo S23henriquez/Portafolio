@@ -1,415 +1,1446 @@
-  <!DOCTYPE html>
-  <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <title>Mi Portafolio</title>
-  <link rel="stylesheet" href="Style.css">
-  </head>
-  <body>
-    <!-- Portada-->
-    <section class="Portada">
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alejandro Henriquez — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      <h1>SAUL ALEJANDRO HENRIQUEZ DIAZ</h1>
-     
-    <div class="opciones">
-      <button id="btnTema" aria-label="Cambiar tema">🌙</button>
+:root {
+  --bg: #F8F7F4;
+  --bg2: #EFEDE8;
+  --bg3: #E5E2DC;
+  --surface: #FFFFFF;
+  --text: #1A1814;
+  --text2: #5A5750;
+  --text3: #9A9590;
+  --accent: #1A1814;
+  --accent2: #C4A882;
+  --border: #DDD9D2;
+  --serif: 'DM Serif Display', serif;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+  --radius: 16px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #121210;
+  --bg2: #1C1C19;
+  --bg3: #252520;
+  --surface: #1C1C19;
+  --text: #F0EDE8;
+  --text2: #A8A49E;
+  --text3: #6A6660;
+  --accent: #F0EDE8;
+  --accent2: #C4A882;
+  --border: #2E2E28;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(248,247,244,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), border-color var(--transition);
+}
+[data-theme="dark"] nav { background: rgba(18,18,16,0.85); }
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+.nav-logo em { font-style: italic; color: var(--accent2); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+
+.theme-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.theme-btn:hover { border-color: var(--text3); transform: rotate(20deg); }
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--bg);
+  background: var(--text);
+  border: none;
+  padding: 10px 22px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.nav-cta:hover { opacity: 0.8; transform: translateY(-1px); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-family: var(--serif);
+  font-size: clamp(120px, 20vw, 280px);
+  color: var(--border);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  opacity: 0.5;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fade-up 0.6s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 32px;
+  max-width: 14ch;
+  opacity: 0;
+  animation: fade-up 0.7s 0.35s forwards;
+}
+.hero-title em { font-style: italic; color: var(--accent2); }
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  opacity: 0;
+  animation: fade-up 0.7s 0.55s forwards;
+}
+
+.hero-desc {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+.hero-stat-num {
+  font-family: var(--serif);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--text);
+  display: block;
+}
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  display: block;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 48px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-scroll::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--text3);
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTION BASE ===== */
+.section {
+  padding: 100px 48px;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 64px;
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent2);
+  letter-spacing: 0.1em;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 56px);
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+.section-title em { font-style: italic; color: var(--accent2); }
+
+/* ===== ABOUT ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 16px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.about-text p strong { color: var(--text); font-weight: 600; }
+
+.about-details { display: flex; flex-direction: column; gap: 24px; }
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.detail-value {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* ===== SKILLS ===== */
+.skills-section { background: var(--bg2); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.skill-group {
+  background: var(--surface);
+  padding: 36px 28px;
+  transition: background var(--transition);
+}
+.skill-group:hover { background: var(--bg3); }
+
+.skill-group-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skill-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text2);
+  background: var(--bg2);
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.skill-tag:hover {
+  color: var(--text);
+  border-color: var(--text3);
+  transform: translateY(-1px);
+}
+
+/* ===== TIMELINE ===== */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 160px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0 48px;
+  margin-bottom: 56px;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 160px;
+  top: 6px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent2);
+  transform: translateX(-4px);
+  border: 2px solid var(--bg);
+}
+.timeline-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+  padding-top: 4px;
+  text-align: right;
+  padding-right: 0;
+}
+.timeline-content {}
+.timeline-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.timeline-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent2);
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.timeline-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ===== PROJECTS ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.project-card {
+  background: var(--surface);
+  padding: 44px 40px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition);
+  border: none;
+  text-align: left;
+  width: 100%;
+}
+.project-card::after {
+  content: '↗';
+  position: absolute;
+  top: 36px; right: 36px;
+  font-size: 20px;
+  color: var(--border);
+  transition: color 0.2s, transform 0.2s;
+}
+.project-card:hover { background: var(--bg2); }
+.project-card:hover::after { color: var(--text); transform: translate(2px, -2px); }
+
+/* Featured project (CodeGym) */
+.project-card.featured {
+  grid-column: 1 / -1;
+  background: var(--text);
+  color: var(--bg);
+}
+.project-card.featured .project-tag { color: var(--accent2); }
+.project-card.featured .project-title { color: var(--bg); }
+.project-card.featured .project-desc { color: rgba(248,247,244,0.6); }
+.project-card.featured::after { color: rgba(248,247,244,0.3); }
+.project-card.featured:hover { background: var(--text); opacity: 0.95; }
+.project-card.featured:hover::after { color: var(--bg); }
+.project-card.featured .project-tech span {
+  border-color: rgba(248,247,244,0.2);
+  color: rgba(248,247,244,0.7);
+}
+
+.project-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+.project-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.project-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.project-tech span {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  max-width: 640px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-header {
+  padding: 32px 36px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.modal-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent2);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+  display: block;
+}
+.modal-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  letter-spacing: -0.5px;
+}
+.modal-close {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text2);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: var(--bg3); color: var(--text); }
+.modal-body { padding: 28px 36px 36px; }
+.modal-body p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.modal-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.modal-body ul li {
+  font-size: 13px;
+  color: var(--text2);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.6;
+}
+.modal-body ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent2);
+  font-size: 12px;
+}
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 100px;
+  text-decoration: none;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+.modal-link:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+/* ===== CODEGYM FEATURE ===== */
+.codegym-section { background: var(--bg2); }
+.codegym-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.codegym-text p {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.codegym-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+.cg-stat {
+  background: var(--surface);
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.cg-stat-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  letter-spacing: -1px;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cg-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+}
+.codegym-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.8; transform: translateY(-1px); }
+.btn-outline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px 28px;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-outline:hover {
+  border-color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* CodeGym mockup */
+.cg-mockup {
+  background: #0A0A0F;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.cg-mock-bar {
+  background: #1A1A26;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.cg-dot { width: 9px; height: 9px; border-radius: 50%; }
+.cg-dot-r { background: #FF5F57; }
+.cg-dot-y { background: #FEBC2E; }
+.cg-dot-g { background: #28C840; }
+.cg-mock-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  margin: 0 auto;
+}
+.cg-mock-body {
+  padding: 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 2;
+  color: rgba(255,255,255,0.7);
+}
+.cg-red { color: #E53E3E; }
+.cg-green { color: #50FA7B; }
+.cg-blue { color: #82AAFF; }
+.cg-yellow { color: #FFD700; }
+.cg-gray { color: rgba(255,255,255,0.3); }
+
+/* ===== CONTACT ===== */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.contact-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.contact-value {
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-value:hover { color: var(--accent2); }
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.form-input, .form-textarea {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--text3); }
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-submit {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 100px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--text);
+}
+.footer-logo em { font-style: italic; color: var(--accent2); }
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text); }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===== SIDEBAR NAV DOTS ===== */
+.side-nav {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.side-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.side-dot::before {
+  content: attr(data-label);
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.side-dot:hover::before { opacity: 1; }
+.side-dot.active { background: var(--accent2); transform: scale(1.4); }
+
+/* ===== LANGUAGES ===== */
+.langs-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.lang-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  min-width: 100px;
+  transition: all 0.2s;
+}
+.lang-item:hover { border-color: var(--accent2); transform: translateY(-2px); }
+.lang-flag { font-size: 28px; }
+.lang-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+}
+.lang-level {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--accent2);
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- SIDE NAV DOTS -->
+<nav class="side-nav" id="sideNav">
+  <div class="side-dot active" data-section="hero" data-label="Inicio" onclick="scrollTo('#hero')"></div>
+  <div class="side-dot" data-section="about" data-label="Sobre mí" onclick="scrollTo('#about')"></div>
+  <div class="side-dot" data-section="skills" data-label="Habilidades" onclick="scrollTo('#skills')"></div>
+  <div class="side-dot" data-section="timeline" data-label="Trayectoria" onclick="scrollTo('#timeline')"></div>
+  <div class="side-dot" data-section="projects" data-label="Proyectos" onclick="scrollTo('#projects')"></div>
+  <div class="side-dot" data-section="codegym" data-label="CodeGym" onclick="scrollTo('#codegym')"></div>
+  <div class="side-dot" data-section="contact" data-label="Contacto" onclick="scrollTo('#contact')"></div>
+</nav>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Ale<em>jandro</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">sobre mí</a></li>
+    <li><a href="#projects">proyectos</a></li>
+    <li><a href="#codegym">CodeGym</a></li>
+    <li><a href="#contact">contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">🌙</button>
+    <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download class="nav-cta">Descargar CV</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-text">Dev</div>
+  <div class="hero-tag">Desarrollador de Aplicaciones · 2º DAM · Barcelona</div>
+  <h1 class="hero-title">Saul<br><em>Alejandro</em><br>Henriquez.</h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">Estudiante de DAM apasionado por construir productos digitales reales. Del backend al móvil, de la base de datos a la interfaz.</p>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">4+</span>
+        <span class="hero-stat-label">Proyectos</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">10+</span>
+        <span class="hero-stat-label">Tecnologías</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">2</span>
+        <span class="hero-stat-label">Años DAM</span>
+      </div>
     </div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</section>
 
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Sobre <em>mí</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Soy estudiante de <strong>Desarrollo de Aplicaciones Multiplataforma</strong> con una mentalidad orientada a resolver problemas reales. Me apasiona construir herramientas que de verdad funcionen y aporten valor.</p>
+      <p>Los deportes de contacto me han enseñado <strong>disciplina, constancia y trabajo en equipo</strong> — cualidades que aplico directamente al desarrollo. Cuando enfrento un bug difícil, no me rindo.</p>
+      <p>Actualmente enfocado en <strong>Android con Kotlin</strong>, desarrollo web full-stack y bases de datos. Siempre buscando el siguiente reto.</p>
 
-     </section>
-
-      <!-- Mini barra de navegación en portada -->
-        <nav class="Navegacion" aria-label="section-nav">
-          <ul>
-            <li><a href="#One" class="nav-bullet" data-tooltip="Presentación"></a></li>
-            <li><a href="#Two" class="nav-bullet" data-tooltip="Habilidades"></a></li>
-            <li><a href="#Three" class="nav-bullet" data-tooltip="Proyectos"></a></li>
-            <li><a href="#Four" class="nav-bullet" data-tooltip="Certificados"></a></li>
-            <li><a href="#Five" class="nav-bullet" data-tooltip="Contacto"></a></li>
-          </ul>
-        </nav>
-
-
-
-    </section>
-    <!-- Sección 1: Presentación -->
-   <section id="One">
-      <div class="one-container">
-        <article class="titlee">
-          <h1>Who I'M</h1>
-          <p>Soy estudiante de Desarrollo de Aplicaciones Multiplataforma. Estudiante de 2º DAM</p>
-          <p>Me apasionan los deportes de contacto, que me han enseñado disciplina, esfuerzo, constancia, y también disfruto aprender sobre historia del mundo.</p>
-          <p>Actualmente estoy enfocado en mejorar mis habilidades en Java, Base de Datos y Desarrollo Web, con el objetivo de crecer como desarrollador y participar en proyectos innovadores.</p>
-        </article>
-
-        <div class="foto">
-          <img src="img/Ale_IA.png" alt="Foto personal">
+      <!-- IDIOMAS -->
+      <div style="margin-top: 32px;">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <span class="section-num" style="font-size:10px;">IDIOMAS</span>
+        </div>
+        <div class="langs-grid">
+          <div class="lang-item">
+            <span class="lang-flag">🇪🇸</span>
+            <span class="lang-name">Español</span>
+            <span class="lang-level">NATIVO</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-flag">🇬🇧</span>
+            <span class="lang-name">Inglés</span>
+            <span class="lang-level">INTERMEDIO</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-flag">🏳️</span>
+            <span class="lang-name">Catalán</span>
+            <span class="lang-level">BÁSICO</span>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- Sección 2: Habilidades -->
-    <section id="Two">
-      <h2>Habilidades</h2>
-
-      <details>
-        <summary>Lenguajes de Programacion</summary>
-        <ul>
-          <li>Java</li>
-          <li>Python</li>
-          <li>HTML & CSS</li>
-          <li>XML</li>
-          <li>SQL</li>
-          <li>PHP</li>
-          <li>Laravel</li>
-          <li>Visual Basic.NET</li>
-          <li>Git y GitHub</li>
-
-        </ul>
-      </details>
-
-      <details>
-        <summary>Sistemas Operativos</summary>
-        <ul>
-          <li>Administracion de Windows</li>
-          <li>Administracion de GNU/Linux</li>
-          <li>Administracion de MacOS</li>
-        </ul>
-      </details>
-
-      <details>
-        <summary>Multimedia</summary>
-        <ul>
-          <li>Photoshop</li>
-          <li>Premier</li>
-        </ul>
-      </details>
-
-      <details>
-        <summary>Soft Skills</summary>
-        <ul>
-          <li>Trabajo en equipo</li>
-          <li>Adaptabilidad</li>
-          <li>Empatia</li>
-          <li>Creatividad</li>
-          <li>Tolerancia</li>
-          <li>Compromiso</li>
-          <li>Responsable</li>
-          <li>Puntual</li>
-          <li>Activo</li>
-        </ul>
-      </details>
-
-      <details>
-        <summary>Lo que viene</summary>
-        <p>Actualmente estoy aprendiendo conocimientos en:</p>
-        <ul class="tecnologias-futuras">
-          <li>Kotlin</li>
-          <li>Android Studio</li>
-          <li>JavaScript</li>
-        </ul>
-  </details>
-    </section>
-
-<!-- Sección 3: Proyectos -->
-<section id="Three">
-  <h2>Proyectos</h2>
-
-  <div class="proyectos-grid">
-  <!-- Proyecto 1 (arriba izquierda) -->
-  <div class="proyecto-card" onclick="abrirModal('modal1')">
-    <img src="img/Login.png" alt="Vista previa Proyecto 1">
-    <h3>Sistema de Facturación Taller</h3>
+    </div>
+    <div class="about-details reveal reveal-delay-2">
+      <div class="detail-item">
+        <span class="detail-label">Ubicación</span>
+        <span class="detail-value">Barcelona, España</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Formación</span>
+        <span class="detail-value">2º DAM — Multiplataforma</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Email</span>
+        <span class="detail-value">shenriquez232@gmail.com</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">GitHub</span>
+        <span class="detail-value">@S23henriquez</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Disponibilidad</span>
+        <span class="detail-value">Prácticas / Junior · 2026</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Intereses</span>
+        <span class="detail-value">Android · Web · Bases de Datos</span>
+      </div>
+    </div>
   </div>
-  
-  <!-- Proyecto 2 (arriba derecha) -->
-  <div class="proyecto-card" onclick="abrirModal('modal2')">
-    <img src="img/Inicio.png" alt="Vista previa Proyecto 2">
-    <h3>Its Me HENRIQUEZ</h3>
-  </div>
-  
-  <!-- Proyecto 3 (abajo izquierda) -->
-  <div class="proyecto-card" onclick="abrirModal('modal3')">
-    <img src="img/Portada_Proyecto_3.png" alt="Vista previa Proyecto 3">
-    <h3>Aplicación Android - Penaltis Multiplayer</h3>
-  </div>
-  
-  <!-- Proyecto 4 (abajo derecha) -->
-  <div class="proyecto-card" onclick="abrirModal('modal4')">
-    <img src="img/Shopping.png" alt="Vista previa Proyecto 4">
-    <h3>Gestor de Tareas (TO-DO-LIST) con Firebase</h3>
-  </div>
-</div>
-
 </section>
 
-<!-- Modal Proyecto 1 -->
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <span class="cerrar" onclick="cerrarModal('modal1')">&times;</span>
-    
-    <h2 class="modal-title">Sistema de Gestión de Facturas y Presupuestos</h2>
-    
+<!-- SKILLS -->
+<section class="section skills-section" id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Habili<em>dades</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">// Lenguajes</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">HTML & CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">XML</span>
+        <span class="skill-tag">VB.NET</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-1">
+      <div class="skill-group-title">// Frameworks & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Android Studio</span>
+        <span class="skill-tag">Laravel</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Git & GitHub</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Firestore</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-2">
+      <div class="skill-group-title">// Sistemas</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Windows Admin</span>
+        <span class="skill-tag">GNU/Linux</span>
+        <span class="skill-tag">macOS</span>
+        <span class="skill-tag">Redes</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-3">
+      <div class="skill-group-title">// Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Trabajo en equipo</span>
+        <span class="skill-tag">Adaptabilidad</span>
+        <span class="skill-tag">Resolución de problemas</span>
+        <span class="skill-tag">Disciplina</span>
+        <span class="skill-tag">Responsabilidad</span>
+        <span class="skill-tag">Creatividad</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" id="timeline">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Trayec<em>toria</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">2026 — Presente</div>
+      <div class="timeline-content">
+        <div class="timeline-title">2º DAM — TFG CodeGym</div>
+        <div class="timeline-sub">CIFP / Instituto · Barcelona</div>
+        <div class="timeline-desc">Desarrollo del TFG: CodeGym, una app Android de aprendizaje de programación con gamificación. 50 lecciones, 5 lenguajes, Firebase, arquitectura MVVM y soporte multilingüe en 5 idiomas.</div>
+      </div>
+    </div>
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-date">2024 — 2025</div>
+      <div class="timeline-content">
+        <div class="timeline-title">1º DAM — Fundamentos</div>
+        <div class="timeline-sub">CIFP / Instituto · Barcelona</div>
+        <div class="timeline-desc">Primeros proyectos con Java, bases de datos relacionales, desarrollo web con HTML/CSS/PHP y fundamentos de programación orientada a objetos.</div>
+      </div>
+    </div>
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-date">2023 — 2024</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Certificaciones Online</div>
+        <div class="timeline-sub">OpenWebinars · Google Cloud</div>
+        <div class="timeline-desc">Curso de Cloud Computing (OpenWebinars) y Prompt Design in Vertex AI — Google Cloud Skill Badge. Primeros pasos en inteligencia artificial aplicada.</div>
+      </div>
+    </div>
+    <div class="timeline-item reveal reveal-delay-3">
+      <div class="timeline-date">2022 — 2023</div>
+      <div class="timeline-content">
+        <div class="timeline-title">Inicio en programación</div>
+        <div class="timeline-sub">Autodidacta</div>
+        <div class="timeline-desc">Primeros proyectos personales, aprendizaje autodidacta de HTML, CSS y Python. Primer contacto con el desarrollo web y la lógica de programación.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Proyec<em>tos</em></h2>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Sistema Facturación (destacado) -->
+    <div class="project-card featured reveal" onclick="openModal('modal-factura')">
+      <span class="project-tag">// Web App · PHP · MySQL</span>
+      <h3 class="project-title">Sistema de Gestión<br>de Taller</h3>
+      <p class="project-desc">Plataforma web completa para la gestión de un taller: clientes, vehículos, facturas, presupuestos y generación de PDFs. Usado en producción real.</p>
+      <div class="project-tech">
+        <span>PHP</span><span>MySQL</span><span>HTML/CSS</span><span>FPDF</span><span>Auth</span>
+      </div>
+    </div>
+
+    <!-- Landing Page Taller -->
+    <div class="project-card reveal" onclick="openModal('modal-landing')">
+      <span class="project-tag">// Web · Landing Page</span>
+      <h3 class="project-title">Landing Page<br>Taller</h3>
+      <p class="project-desc">Página web corporativa para el mismo taller. Diseño responsivo moderno, formulario de contacto y presentación de servicios.</p>
+      <div class="project-tech">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span>
+      </div>
+    </div>
+
+    <!-- Penaltis Multiplayer -->
+    <div class="project-card reveal reveal-delay-1" onclick="openModal('modal-penaltis')">
+      <span class="project-tag">// Android · Kotlin</span>
+      <h3 class="project-title">Penaltis<br>Multiplayer</h3>
+      <p class="project-desc">Juego Android multijugador de penaltis con sistema de turnos, marcador y efectos visuales animados.</p>
+      <div class="project-tech">
+        <span>Kotlin</span><span>Android</span><span>Sockets</span>
+      </div>
+    </div>
+
+    <!-- To-Do List Firebase -->
+    <div class="project-card reveal reveal-delay-2" onclick="openModal('modal-todo')">
+      <span class="project-tag">// Android · Firebase</span>
+      <h3 class="project-title">To-Do List<br>con Firebase</h3>
+      <p class="project-desc">Aplicación Android de gestión de tareas con autenticación, Firestore y CRUD completo en tiempo real.</p>
+      <div class="project-tech">
+        <span>Kotlin</span><span>Firebase Auth</span><span>Firestore</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CODEGYM FEATURE -->
+<section class="section codegym-section" id="codegym">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Code<em>Gym</em></h2>
+  </div>
+  <div class="codegym-layout">
+    <div class="codegym-text reveal">
+      <p>Mi proyecto más ambicioso. Una aplicación Android de aprendizaje de programación al estilo Duolingo, desarrollada como Trabajo de Fin de Grado junto a Roc Benach.</p>
+      <p>Diseñada desde cero con arquitectura MVVM, Firebase como backend, 50 lecciones con ejercicios reales y un sistema completo de gamificación.</p>
+      <div class="codegym-stats">
+        <div class="cg-stat">
+          <span class="cg-stat-num">50</span>
+          <span class="cg-stat-label">// Lecciones</span>
+        </div>
+        <div class="cg-stat">
+          <span class="cg-stat-num">5</span>
+          <span class="cg-stat-label">// Lenguajes</span>
+        </div>
+        <div class="cg-stat">
+          <span class="cg-stat-num">13</span>
+          <span class="cg-stat-label">// Logros</span>
+        </div>
+        <div class="cg-stat">
+          <span class="cg-stat-num">5</span>
+          <span class="cg-stat-label">// Idiomas</span>
+        </div>
+      </div>
+      <div class="codegym-actions">
+        <a href="#" class="btn-primary">Ver demo →</a>
+        <a href="https://github.com/S23henriquez" target="_blank" class="btn-outline">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="cg-mockup">
+        <div class="cg-mock-bar">
+          <div class="cg-dot cg-dot-r"></div>
+          <div class="cg-dot cg-dot-y"></div>
+          <div class="cg-dot cg-dot-g"></div>
+          <span class="cg-mock-title">codegym — lesson_py_1.kt</span>
+        </div>
+        <div class="cg-mock-body">
+          <div><span class="cg-gray">// LECCIÓN 1 — PYTHON BÁSICO</span></div>
+          <div>&nbsp;</div>
+          <div><span class="cg-red">val</span> <span class="cg-blue">lesson</span> = <span class="cg-yellow">Lesson</span>(</div>
+          <div>&nbsp;&nbsp;id = <span class="cg-green">"py_1_1"</span>,</div>
+          <div>&nbsp;&nbsp;title = <span class="cg-green">"Variables en Python"</span>,</div>
+          <div>&nbsp;&nbsp;xpReward = <span class="cg-yellow">25</span>,</div>
+          <div>&nbsp;&nbsp;exercises = <span class="cg-red">listOf</span>(...)</div>
+          <div>)</div>
+          <div>&nbsp;</div>
+          <div><span class="cg-gray">// Resultado al completar:</span></div>
+          <div><span class="cg-green">✓ +25 XP · Racha: 🔥 7 días</span></div>
+          <div><span class="cg-green">✓ Logro: "Primer paso" desbloqueado</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header reveal">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Contac<em>to</em></h2>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a href="mailto:shenriquez232@gmail.com" class="contact-value">shenriquez232@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">GitHub</span>
+        <a href="https://github.com/S23henriquez" target="_blank" class="contact-value">github.com/S23henriquez</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/" target="_blank" class="contact-value">Saul Alejandro Henriquez Diaz</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Currículum</span>
+        <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download class="contact-value">Descargar CV →</a>
+      </div>
+    </div>
+    <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/movkwqay" method="POST">
+      <div class="form-group">
+        <label class="form-label" for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" class="form-input" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-input" required placeholder="tu@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" class="form-textarea" required placeholder="¿En qué puedo ayudarte?"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Enviar mensaje →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ale<em>jandro</em></div>
+  <span class="footer-copy">© 2026 Saul Alejandro Henriquez Diaz</span>
+  <div class="footer-links">
+    <a href="https://github.com/S23henriquez" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/" target="_blank">LinkedIn</a>
+    <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download>CV</a>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-factura">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">// Web App · PHP · MySQL</span>
+        <h2 class="modal-title">Sistema de Gestión de Taller</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-factura')">✕</button>
+    </div>
     <div class="modal-body">
-      <p>
-        Desarrollé una aplicación web en <strong>PHP con MySQL</strong> para gestionar clientes, 
-        sus vehículos, facturas y presupuestos de un taller.  
-        Este sistema facilita la organización de la información y automatiza procesos clave.
-      </p>
-      
-      <ul class="modal-list">
-        <li>Registrar clientes y asociarles múltiples coches.</li>
-        <li>Crear facturas o presupuestos seleccionando al cliente y vehículo correspondiente.</li>
-        <li>Añadir servicios desde un catálogo o de manera manual, con posibilidad de aplicar descuentos.</li>
-        <li>Calcular automáticamente subtotales, IVA y total.</li>
-        <li>Generar documentos en PDF con todos los datos del cliente, vehículo y servicios.</li>
-        <li>Gestión de usuarios con roles y autenticación segura con contraseñas encriptadas.</li>
-      </ul>
-
-      <p>
-        Este es un proyecto que utilizo a nivel personal y familiar para mejorar la gestión 
-        de un taller de confianza. Actualmente sigo <em>mejorándolo</em> con nuevas funcionalidades 
-        y optimizaciones.
-      </p>
-    </div>
-
-    <!-- Imagen destacada -->
-    <div class="modal-image">
-      <img src="img/Inicio.jpg" alt="Captura del sistema">
-    </div>
-  </div>
-</div>
-
-<!-- Modal Proyecto 2 -->
-<div id="modal2" class="modal">
-  <div class="modal-content">
-    <span class="cerrar" onclick="cerrarModal('modal2')">&times;</span>
-
-    <h2>Portafolio Personal</h2>
-
-    <p>
-      Desarrollé una página web personal utilizando <strong>HTML, CSS </strong> y JavaScript, 
-      en la cual muestro información sobre mí, mis habilidades técnicas, proyectos realizados 
-      y una sección de contacto interactiva.
-    </p>
-
-    <ul>
-      <li>Sección de presentación con un diseño moderno y responsivo.</li>
-      <li>Listado de habilidades técnicas con íconos representativos.</li>
-      <li>Galería de proyectos con modales explicativos.</li>
-      <li>Formulario de contacto funcional con validación.</li>
-      <li>Soporte para tema claro/oscuro.</li>
-    </ul>
-    </a>
-  </div>
-</div>
-
-
-<!-- Modal Proyecto 3 -->
-<div id="modal3" class="modal">
-  <div class="modal-content">
-    <span class="cerrar" onclick="cerrarModal('modal3')">&times;</span>
-
-    <h2>Juego de Penaltis Multijugador (Android)</h2>
-
-    <p>
-      Desarrollo de una aplicación Android en <strong>Kotlin</strong> que simula un juego
-      de penaltis entre dos jugadores (Host y Guest), con lógica de turnos y resultado final.
-    </p>
-
-    <ul>
-      <li>Comunicación entre jugadores en tiempo real.</li>
-      <li>Sistema de turnos y control de marcador.</li>
-      <li>Interfaz animada con efectos visuales.</li>
-      <li>Gestión de estados de juego (victoria, derrota, empate).</li>
-    </ul>
-
-    <p>
-      Este proyecto me ha permitido reforzar conceptos clave de lógica de juego,
-      control de estados y desarrollo Android.
-    </p>
-
-    <div class="modal-image">
-  <a href="https://drive.google.com/file/d/18RO2H749pxCAFCtpGTLhIPFMFekGEXC9/view?usp=sharing"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Abrir ejemplo de juego en Drive">
-    <img src="img/Partida.png" alt="Captura del juego de penaltis">
-  </a>
-</div>
-
-
-  </div>
-</div>
-
-  <!-- Modal Proyecto 4 -->
-<div id="modal4" class="modal">
-  <div class="modal-content">
-    <span class="cerrar" onclick="cerrarModal('modal4')">&times;</span>
-
-    <h2>Aplicación To-Do List con Firebase</h2>
-
-    <p>
-      Aplicación Android desarrollada con <strong>Kotlin y Firebase</strong> para la
-      gestión de tareas personales con autenticación de usuarios.
-    </p>
-
-    <ul>
-      <li>Registro e inicio de sesión con Firebase Authentication.</li>
-      <li>Persistencia de datos en Firebase Firestore.</li>
-      <li>CRUD completo de tareas.</li>
-      <li>Interfaz clara y orientada a la usabilidad.</li>
-    </ul>
-
-    <p>
-      Este proyecto consolida mis conocimientos en aplicaciones móviles conectadas
-      a servicios en la nube.
-    </p>
-
-    <div class="modal-image">
-      <img src="img/Interfaz.png" alt="Captura gestor de tareas">
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-function abrirModal(id) {
-  document.getElementById(id).style.display = "block";
-}
-function cerrarModal(id) {
-  document.getElementById(id).style.display = "none";
-}
-</script>
-
-
-    <!-- Sección 4: Certificados -->
-<section id="Four">
-  <h2>Certificados / Insignias</h2>
-  <div class="certificados-grid">
-    <div class="certificado-card">
-      <div class="certificado-content">
-        <h4>Open Webinars</h4>
-        <embed src="img/certificado_curso_online_de_introducción_a_cloud_computing.pdf" type="application/pdf">
-        <a href="img/certificado_curso_online_de_introducción_a_cloud_computing.pdf" class="btn-descargar" download>Descargar</a>
-      </div>
-    </div>
-
-    <div class="certificado-card">
-      <div class="certificado-content">
-        <h4>Prompt Design in Vertex AI Skill Badge</h4>
-        <embed src="img/prompt-design-in-vertex-ai-skill-badge.pdf" type="application/pdf">
-        <a href="img/prompt-design-in-vertex-ai-skill-badge.pdf" class="btn-descargar" download>Descargar</a>
-      </div>
-    </div>
-
-    <!-- Agrega más certificados aquí -->
-  </div>
-</section>
-
-
-    <!-- Sección 5: Contacto -->
-    <section id="Five">
-      <h2>Contacto</h2>
-      <p>Email: shenriquez232@gmail.com</p>
-        <form action="https://formspree.io/f/movkwqay" method="POST" class="form-contacto">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" required></textarea>
-
-        <button type="submit">Enviar</button>
-      </form>
-
-      <p>GitHub: <a href="https://github.com/S23henriquez">S23henriquez</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/">Saul Alejandro Henriquez Diaz</a></p>
-      <p><a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" class="pdf-resumen" target="_blank" download>CV</a></p>
-    </section>
-
-
-    <nav aria-label="Navegacion" id="section-nav">
+      <p>Aplicación web completa desarrollada en <strong>PHP con MySQL</strong> para gestionar clientes, vehículos, facturas y presupuestos de un taller real. Usada activamente en producción.</p>
       <ul>
-        <li><a href="#One" class="nav-bullet current"></a></li>
-        <li><a href="#Two" class="nav-bullet"></a></li>
-        <li><a href="#Three" class="nav-bullet"></a></li>
-        <li><a href="#Four" class="nav-bullet"></a></li>
-        <li><a href="#Five" class="nav-bullet"></a></li>
+        <li>Gestión de clientes con múltiples vehículos asociados</li>
+        <li>Creación de facturas y presupuestos con catálogo de servicios</li>
+        <li>Aplicación de descuentos y cálculo automático de IVA</li>
+        <li>Generación de PDFs profesionales con todos los detalles</li>
+        <li>Sistema de autenticación con roles y contraseñas encriptadas</li>
+        <li>Panel de administración con historial completo</li>
       </ul>
-    </nav>
+      <p>Proyecto personal que sigo mejorando activamente. Primer proyecto desplegado en producción real.</p>
+    </div>
+  </div>
+</div>
 
-    <footer id="Footer">
-      <p>© 2025 Saul Alejandro Henriquez Diaz.</p>
-      <p>Todos los derechos reservados.</p>
-      <p>Intento aprender que programar no es memorizar; es aprender a resolver problemas paso a paso.</p>
-    </footer>
+<div class="modal-overlay" id="modal-landing">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">// Web · Landing Page</span>
+        <h2 class="modal-title">Landing Page del Taller</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-landing')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Página web corporativa diseñada y desarrollada para el mismo taller del sistema de facturación. Presentación profesional de la empresa en internet.</p>
+      <ul>
+        <li>Diseño moderno y completamente responsivo</li>
+        <li>Sección de servicios y presentación del taller</li>
+        <li>Formulario de contacto funcional</li>
+        <li>Optimizada para móvil y SEO básico</li>
+        <li>Coherente con la identidad visual del negocio</li>
+      </ul>
+      <p>Proyecto complementario al sistema de facturación. Ambos forman el ecosistema digital completo del taller.</p>
+    </div>
+  </div>
+</div>
 
+<div class="modal-overlay" id="modal-penaltis">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">// Android · Kotlin</span>
+        <h2 class="modal-title">Penaltis Multiplayer</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-penaltis')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Juego Android multijugador que simula un partido de penaltis entre dos jugadores (Host y Guest) con lógica de turnos y resultado final.</p>
+      <ul>
+        <li>Comunicación entre jugadores en tiempo real</li>
+        <li>Sistema de turnos y control de marcador</li>
+        <li>Interfaz animada con efectos visuales</li>
+        <li>Gestión de estados: victoria, derrota y empate</li>
+      </ul>
+      <p>Proyecto clave para reforzar lógica de juego, control de estados y comunicación entre dispositivos Android.</p>
+      <a href="https://drive.google.com/file/d/18RO2H749pxCAFCtpGTLhIPFMFekGEXC9/view?usp=sharing" target="_blank" class="modal-link">Ver demo en Drive ↗</a>
+    </div>
+  </div>
+</div>
 
-  </body>
-  </html>
+<div class="modal-overlay" id="modal-todo">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <span class="modal-tag">// Android · Firebase</span>
+        <h2 class="modal-title">To-Do List con Firebase</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-todo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Aplicación Android de gestión de tareas personales con autenticación de usuarios y sincronización en la nube mediante Firebase.</p>
+      <ul>
+        <li>Registro e inicio de sesión con Firebase Authentication</li>
+        <li>Persistencia de datos en Firebase Firestore en tiempo real</li>
+        <li>CRUD completo de tareas (crear, leer, actualizar, eliminar)</li>
+        <li>Interfaz limpia y orientada a la usabilidad</li>
+      </ul>
+      <p>Base para los proyectos Firebase posteriores, incluyendo CodeGym.</p>
+    </div>
+  </div>
+</div>
 
-
-<!-- Boton de Tema Calro/Oscuro -->
 <script>
-// Cambiar tema claro/oscuro
-const btnTema = document.getElementById('btnTema');
-btnTema.addEventListener('click', () => {
-  document.body.classList.toggle('tema-oscuro');
-  btnTema.textContent = document.body.classList.contains('tema-oscuro') ? "☀️" : "🌙";
+// Theme toggle
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const saved = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', saved);
+themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+
+themeBtn.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', next);
 });
 
-// Nav-bullets activas según scroll
-const bullets = document.querySelectorAll('.nav-bullet');
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-bullets.forEach((bullet) => {
-  bullet.addEventListener('click', (e) => {
-    e.preventDefault();
-    bullets.forEach(b => b.classList.remove('current'));
-    bullet.classList.add('current');
+// Side nav dots
+const sections = ['hero','about','skills','timeline','projects','codegym','contact'];
+const dots = document.querySelectorAll('.side-dot');
 
-     // Obtener ID sin '#'
-    const targetId = bullet.getAttribute('href').substring(1);
-    const targetSection = document.getElementById(targetId);
-    targetSection.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// Actualizar bullet activo al hacer scroll
-window.addEventListener('scroll', () => {
-  const scrollPos = window.scrollY + window.innerHeight / 2;
-  bullets.forEach((bullet) => {
-    const targetId = bullet.getAttribute('href').substring(1);
-    const section = document.getElementById(targetId);
-    if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
-      bullets.forEach(b => b.classList.remove('current'));
-      bullet.classList.add('current');
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      dots.forEach(d => d.classList.remove('active'));
+      const active = document.querySelector(`.side-dot[data-section="${e.target.id}"]`);
+      if (active) active.classList.add('active');
     }
   });
+}, { threshold: 0.4 });
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
 });
 
-// Detectar sección visible y aplicar efecto fade
-const sectionsFade = document.querySelectorAll("section");
-
-function actualizarSeccionActiva() {
-  const scrollPos = window.scrollY + window.innerHeight / 2;
-
-
-  // Añadir clase inactive a todas las secciones
-  sectionsFade.forEach((sec) => sec.classList.add("inactive")); 
-  sectionsFade.forEach((sec) => {
-    if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
-      sec.classList.remove("inactive");
-      sec.classList.add("active");
-    }
-  });
+function scrollTo(selector) {
+  document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' });
 }
 
-window.addEventListener("scroll", actualizarSeccionActiva);
-
-// Inicializamos la primera sección como activa
-actualizarSeccionActiva();
-
+// Modals
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal(overlay.id);
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+  }
+});
 </script>
+</body>
+</html>
