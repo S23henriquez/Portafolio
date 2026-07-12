@@ -1,47 +1,46 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alejandro Henriquez — Developer</title>
+<title>Saul Alejandro Henríquez — Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F8F7F4;
-  --bg2: #EFEDE8;
-  --bg3: #E5E2DC;
+  --bg: #FAFAF7;
+  --bg2: #F1EFEA;
+  --bg3: #E8E5DE;
   --surface: #FFFFFF;
-  --text: #1A1814;
-  --text2: #5A5750;
-  --text3: #9A9590;
-  --accent: #1A1814;
-  --accent2: #C4A882;
-  --border: #DDD9D2;
-  --serif: 'DM Serif Display', serif;
-  --mono: 'DM Mono', monospace;
-  --sans: 'DM Sans', sans-serif;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
-  --radius: 16px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --text: #1B1D22;
+  --text2: #5B6270;
+  --text3: #95A0AC;
+  --border: #DEDBD3;
+  --accent: #6E56CF;
+  --accent2: #1E8F7D;
+  --accent-warm: #B5701E;
+  --danger: #C4432E;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+  --radius: 10px;
+  --transition: 0.25s ease;
 }
 
 [data-theme="dark"] {
-  --bg: #121210;
-  --bg2: #1C1C19;
-  --bg3: #252520;
-  --surface: #1C1C19;
-  --text: #F0EDE8;
-  --text2: #A8A49E;
-  --text3: #6A6660;
-  --accent: #F0EDE8;
-  --accent2: #C4A882;
-  --border: #2E2E28;
-  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+  --bg: #14151A;
+  --bg2: #1B1D24;
+  --bg3: #242631;
+  --surface: #1B1D24;
+  --text: #E7E5DF;
+  --text2: #9098A6;
+  --text3: #565D6B;
+  --border: #282B35;
+  --accent: #9D8CFF;
+  --accent2: #5FD9C5;
+  --accent-warm: #E3A458;
+  --danger: #E2725B;
 }
 
 html { scroll-behavior: smooth; }
@@ -50,1153 +49,632 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-weight: 400;
   line-height: 1.6;
   transition: background var(--transition), color var(--transition);
-  overflow-x: hidden;
+  padding-top: 46px;
+  padding-bottom: 30px;
 }
 
-/* ===== SCROLLBAR ===== */
+::selection { background: var(--accent); color: var(--bg); }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-/* ===== NAV ===== */
-nav {
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ===== TAB BAR ===== */
+.tabbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 0 48px;
-  height: 64px;
+  height: 46px;
+  display: flex;
+  align-items: stretch;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.tab-brand {
+  flex-shrink: 0;
+  width: 46px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: rgba(248,247,244,0.85);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  transition: background var(--transition), border-color var(--transition);
+  justify-content: center;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--bg);
+  background: var(--accent);
+  cursor: pointer;
 }
-[data-theme="dark"] nav { background: rgba(18,18,16,0.85); }
-
-.nav-logo {
-  font-family: var(--serif);
-  font-size: 18px;
-  color: var(--text);
-  text-decoration: none;
-  letter-spacing: -0.3px;
-}
-.nav-logo em { font-style: italic; color: var(--accent2); }
-
-.nav-links {
+.tabs {
   display: flex;
-  gap: 32px;
-  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
-.nav-links a {
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text3);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s;
+}
+.tab:hover { color: var(--text2); background: var(--bg3); }
+.tab.active { color: var(--text); background: var(--bg); }
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+}
+.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dot-cyan { background: #5FD9C5; }
+.dot-blue { background: #6EA8FE; }
+.dot-amber { background: #E3A458; }
+.dot-orange { background: #E88D5D; }
+.dot-violet { background: #9D8CFF; }
+.dot-mint { background: #5FD9C5; }
+.dot-red { background: #E2725B; }
+
+.tabbar-right {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+}
+.btn-cv {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text3);
-  text-decoration: none;
-  letter-spacing: 0.05em;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--text); }
-
-.nav-right { display: flex; align-items: center; gap: 16px; }
-
-.theme-btn {
-  width: 40px; height: 40px;
-  border-radius: 50%;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  background: var(--bg3);
   border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text2);
-  cursor: pointer;
-  font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
   transition: all 0.2s;
 }
-.theme-btn:hover { border-color: var(--text3); transform: rotate(20deg); }
+.btn-cv:hover { border-color: var(--accent); color: var(--accent); }
 
-.nav-cta {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: var(--bg);
-  background: var(--text);
-  border: none;
-  padding: 10px 22px;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.2s;
-}
-.nav-cta:hover { opacity: 0.8; transform: translateY(-1px); }
-
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 48px 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-bg-text {
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  font-family: var(--serif);
-  font-size: clamp(120px, 20vw, 280px);
-  color: var(--border);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  opacity: 0.5;
-}
-
-.hero-tag {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent2);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  opacity: 0;
-  animation: fade-up 0.6s 0.2s forwards;
-}
-
-.hero-title {
-  font-family: var(--serif);
-  font-size: clamp(52px, 8vw, 100px);
-  line-height: 1;
-  letter-spacing: -2px;
-  margin-bottom: 32px;
-  max-width: 14ch;
-  opacity: 0;
-  animation: fade-up 0.7s 0.35s forwards;
-}
-.hero-title em { font-style: italic; color: var(--accent2); }
-
-.hero-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 48px;
-  opacity: 0;
-  animation: fade-up 0.7s 0.55s forwards;
-}
-
-.hero-desc {
-  font-family: var(--sans);
-  font-size: 16px;
-  color: var(--text2);
-  line-height: 1.7;
-  max-width: 420px;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 40px;
-  flex-shrink: 0;
-}
-.hero-stat-num {
-  font-family: var(--serif);
-  font-size: 40px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: var(--text);
-  display: block;
-}
-.hero-stat-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 0.1em;
-  margin-top: 4px;
-  display: block;
-}
-
-.hero-scroll {
-  position: absolute;
-  bottom: 40px;
-  left: 48px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 0.15em;
+/* ===== STATUS BAR ===== */
+.statusbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 30px;
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-.hero-scroll::before {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 1px;
-  background: var(--text3);
-}
-
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== SECTION BASE ===== */
-.section {
-  padding: 100px 48px;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--bg2);
   border-top: 1px solid var(--border);
-}
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-  margin-bottom: 64px;
-}
-.section-num {
   font-family: var(--mono);
   font-size: 11px;
+  color: var(--text3);
+}
+.sb-left, .sb-right { display: flex; align-items: center; gap: 16px; }
+.sb-branch { color: var(--accent2); }
+.sb-theme {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.sb-theme:hover { color: var(--text); }
+
+/* ===== PANES / SECTIONS ===== */
+.pane { padding: 90px 48px; border-bottom: 1px solid var(--border); }
+.pane.alt { background: var(--bg2); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--accent2);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
 }
 .section-title {
-  font-family: var(--serif);
-  font-size: clamp(36px, 5vw, 56px);
-  letter-spacing: -1.5px;
-  line-height: 1;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.5px;
+  margin-bottom: 48px;
 }
-.section-title em { font-style: italic; color: var(--accent2); }
+
+/* ===== CODE BLOCK (shared) ===== */
+.code-block {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.9;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 0;
+  counter-reset: line;
+  overflow-x: auto;
+}
+.cl {
+  display: flex;
+  padding: 0 20px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.cl::before {
+  counter-increment: line;
+  content: counter(line);
+  width: 24px;
+  margin-right: 18px;
+  text-align: right;
+  color: var(--text3);
+  flex-shrink: 0;
+  user-select: none;
+}
+.cl.ind { padding-left: 40px; }
+.tok-kw { color: var(--accent); }
+.tok-type { color: var(--accent-warm); }
+.tok-str { color: var(--accent2); }
+.tok-var { color: var(--text); }
+.tok-com { color: var(--text3); font-style: italic; }
+
+/* ===== HERO ===== */
+.hero { padding-top: 110px; padding-bottom: 70px; }
+.hero-name {
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 40px;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+.hero-intro {
+  font-size: 17px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-width: 40ch;
+}
+.hero-meta {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text3);
+  margin-bottom: 48px;
+}
+.scroll-cue {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+}
 
 /* ===== ABOUT ===== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
   align-items: start;
 }
 .about-text p {
-  font-size: 16px;
+  font-size: 15.5px;
   color: var(--text2);
-  line-height: 1.8;
-  margin-bottom: 20px;
+  line-height: 1.85;
+  margin-bottom: 18px;
 }
-.about-text p strong { color: var(--text); font-weight: 600; }
-
-.about-details { display: flex; flex-direction: column; gap: 24px; }
-
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
-.detail-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.detail-value {
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--text);
-  font-weight: 500;
-  text-align: right;
-}
+.about-text strong { color: var(--text); font-weight: 600; }
 
 /* ===== SKILLS ===== */
-.skills-section { background: var(--bg2); }
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-}
-.skill-group {
-  background: var(--surface);
-  padding: 36px 28px;
-  transition: background var(--transition);
-}
-.skill-group:hover { background: var(--bg3); }
-
-.skill-group-title {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--accent2);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.skill-tag {
-  font-family: var(--mono);
-  font-size: 11px;
+.skills-json .cl .arr {
   color: var(--text2);
-  background: var(--bg2);
-  padding: 5px 12px;
-  border-radius: 100px;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
 }
-.skill-tag:hover {
-  color: var(--text);
-  border-color: var(--text3);
-  transform: translateY(-1px);
-}
+.skills-json .tok-str { }
 
-/* ===== TIMELINE ===== */
-.timeline { position: relative; }
-.timeline::before {
+/* ===== GIT LOG ===== */
+.git-log { position: relative; padding-left: 36px; }
+.git-log::before {
   content: '';
   position: absolute;
-  left: 160px;
-  top: 0; bottom: 0;
+  left: 5px; top: 6px; bottom: 6px;
   width: 1px;
   background: var(--border);
 }
-.timeline-item {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 0 48px;
-  margin-bottom: 56px;
-  position: relative;
-}
-.timeline-item::before {
-  content: '';
+.commit { position: relative; padding-bottom: 44px; }
+.commit:last-child { padding-bottom: 0; }
+.commit-dot {
   position: absolute;
-  left: 160px;
-  top: 6px;
-  width: 9px; height: 9px;
+  left: -31px; top: 5px;
+  width: 10px; height: 10px;
   border-radius: 50%;
   background: var(--accent2);
-  transform: translateX(-4px);
   border: 2px solid var(--bg);
 }
-.timeline-date {
+.commit-dot.head { background: var(--accent); }
+.commit-head {
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-  letter-spacing: 0.05em;
-  padding-top: 4px;
-  text-align: right;
-  padding-right: 0;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
 }
-.timeline-content {}
-.timeline-title {
-  font-family: var(--serif);
-  font-size: 22px;
-  letter-spacing: -0.5px;
+.hash { color: var(--text3); }
+.branch {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+.commit-date { color: var(--text3); }
+.commit-title {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 18px;
   margin-bottom: 4px;
 }
-.timeline-sub {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent2);
-  letter-spacing: 0.05em;
-  margin-bottom: 10px;
-}
-.timeline-desc {
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.7;
-}
+.commit-sub { font-family: var(--mono); font-size: 12px; color: var(--accent2); margin-bottom: 10px; }
+.commit-desc { font-size: 14px; color: var(--text2); line-height: 1.7; max-width: 60ch; }
 
-/* ===== PROJECTS ===== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-}
-
-.project-card {
+/* ===== PROJECTS (file explorer) ===== */
+.file-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); }
+.file-card {
   background: var(--surface);
-  padding: 44px 40px;
+  padding: 32px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: background var(--transition);
   border: none;
   text-align: left;
   width: 100%;
+  transition: background var(--transition);
 }
-.project-card::after {
-  content: '↗';
-  position: absolute;
-  top: 36px; right: 36px;
-  font-size: 20px;
-  color: var(--border);
-  transition: color 0.2s, transform 0.2s;
-}
-.project-card:hover { background: var(--bg2); }
-.project-card:hover::after { color: var(--text); transform: translate(2px, -2px); }
-
-/* Featured project (CodeGym) */
-.project-card.featured {
-  grid-column: 1 / -1;
-  background: var(--text);
-  color: var(--bg);
-}
-.project-card.featured .project-tag { color: var(--accent2); }
-.project-card.featured .project-title { color: var(--bg); }
-.project-card.featured .project-desc { color: rgba(248,247,244,0.6); }
-.project-card.featured::after { color: rgba(248,247,244,0.3); }
-.project-card.featured:hover { background: var(--text); opacity: 0.95; }
-.project-card.featured:hover::after { color: var(--bg); }
-.project-card.featured .project-tech span {
-  border-color: rgba(248,247,244,0.2);
-  color: rgba(248,247,244,0.7);
-}
-
-.project-tag {
+.file-card:hover { background: var(--bg3); }
+.file-card.pinned { grid-column: 1 / -1; }
+.file-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.file-name {
   font-family: var(--mono);
-  font-size: 10px;
-  color: var(--accent2);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: block;
-}
-.project-title {
-  font-family: var(--serif);
-  font-size: clamp(24px, 3vw, 36px);
-  letter-spacing: -1px;
-  line-height: 1.1;
-  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 17px;
   color: var(--text);
 }
-.project-desc {
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.7;
-  margin-bottom: 28px;
-  max-width: 480px;
-}
-.project-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.project-tech span {
+.pin {
+  margin-left: auto;
   font-family: var(--mono);
   font-size: 10px;
-  color: var(--text3);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 100px;
+  color: var(--accent-warm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
+.file-desc { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 16px; max-width: 60ch; }
+.file-meta { font-family: var(--mono); font-size: 11.5px; color: var(--text3); }
 
 /* Modal */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
   z-index: 200;
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
+  align-items: center; justify-content: center;
+  padding: 24px;
 }
 .modal-overlay.open { display: flex; }
-
 .modal-box {
   background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  max-width: 640px;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  animation: modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 640px; width: 100%;
+  max-height: 80vh; overflow-y: auto;
+  animation: modal-in 0.2s ease;
 }
-@keyframes modal-in {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
+@keyframes modal-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 .modal-header {
-  padding: 32px 36px 24px;
+  padding: 20px 28px;
   border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-.modal-tag {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
   font-family: var(--mono);
-  font-size: 10px;
-  color: var(--accent2);
-  letter-spacing: 0.15em;
-  margin-bottom: 8px;
-  display: block;
-}
-.modal-title {
-  font-family: var(--serif);
-  font-size: 28px;
-  letter-spacing: -0.5px;
+  font-size: 12.5px;
+  color: var(--text3);
+  position: sticky; top: 0;
+  background: var(--surface);
 }
 .modal-close {
-  background: var(--bg2);
+  background: var(--bg3);
   border: 1px solid var(--border);
-  border-radius: 50%;
-  width: 36px; height: 36px;
-  font-size: 18px;
+  border-radius: 6px;
+  width: 28px; height: 28px;
   cursor: pointer;
   color: var(--text2);
   flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
+  font-family: var(--mono);
 }
-.modal-close:hover { background: var(--bg3); color: var(--text); }
-.modal-body { padding: 28px 36px 36px; }
-.modal-body p {
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-.modal-body ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-}
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 24px 28px 32px; }
+.modal-body h3 { font-family: var(--mono); font-size: 20px; margin-bottom: 14px; }
+.modal-body p { font-size: 14px; color: var(--text2); line-height: 1.8; margin-bottom: 16px; }
+.modal-body ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
 .modal-body ul li {
-  font-size: 13px;
-  color: var(--text2);
-  padding-left: 20px;
-  position: relative;
-  line-height: 1.6;
+  font-size: 13px; color: var(--text2); padding-left: 20px; position: relative; line-height: 1.6;
 }
-.modal-body ul li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--accent2);
-  font-size: 12px;
-}
+.modal-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent2); font-size: 12px; }
 .modal-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 10px 20px;
-  border-radius: 100px;
-  text-decoration: none;
-  margin-top: 8px;
-  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; color: var(--text);
+  border: 1px solid var(--border); padding: 9px 18px; border-radius: 6px;
+  text-decoration: none; transition: all 0.2s;
 }
-.modal-link:hover {
-  background: var(--text);
-  color: var(--bg);
-  border-color: var(--text);
-}
+.modal-link:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ===== CODEGYM FEATURE ===== */
-.codegym-section { background: var(--bg2); }
-.codegym-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-.codegym-text p {
-  font-size: 15px;
-  color: var(--text2);
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-.codegym-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin: 32px 0;
-}
-.cg-stat {
-  background: var(--surface);
-  padding: 20px 24px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-.cg-stat-num {
-  font-family: var(--serif);
-  font-size: 32px;
-  letter-spacing: -1px;
-  color: var(--text);
-  display: block;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.cg-stat-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 0.1em;
-}
+/* ===== CODEGYM ===== */
+.codegym-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.codegym-text p { font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 16px; }
+.repo-stats { display: flex; flex-wrap: wrap; gap: 20px; margin: 28px 0 32px; font-family: var(--mono); }
+.repo-stat { display: flex; align-items: baseline; gap: 7px; }
+.repo-stat-icon { color: var(--accent-warm); }
+.repo-stat-num { font-weight: 700; font-size: 18px; }
+.repo-stat-label { color: var(--text3); font-size: 11.5px; }
 .codegym-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-primary {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  padding: 12px 28px;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: opacity 0.2s, transform 0.2s;
+.btn-primary, .btn-outline {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em;
+  padding: 11px 24px; border-radius: 6px; cursor: pointer;
+  text-decoration: none; display: inline-block; transition: all 0.2s;
 }
-.btn-primary:hover { opacity: 0.8; transform: translateY(-1px); }
-.btn-outline {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 12px 28px;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.2s;
-}
-.btn-outline:hover {
-  border-color: var(--text);
-  transform: translateY(-1px);
-}
+.btn-primary { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
+.btn-primary:hover { opacity: 0.85; }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-/* CodeGym mockup */
 .cg-mockup {
-  background: #0A0A0F;
-  border-radius: 20px;
+  background: #0D0E12;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 .cg-mock-bar {
-  background: #1A1A26;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  background: #16171D;
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 8px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.cg-dot { width: 9px; height: 9px; border-radius: 50%; }
-.cg-dot-r { background: #FF5F57; }
-.cg-dot-y { background: #FEBC2E; }
-.cg-dot-g { background: #28C840; }
-.cg-mock-title {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: rgba(255,255,255,0.3);
-  margin: 0 auto;
-}
-.cg-mock-body {
-  padding: 24px;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  line-height: 2;
-  color: rgba(255,255,255,0.7);
-}
-.cg-red { color: #E53E3E; }
-.cg-green { color: #50FA7B; }
-.cg-blue { color: #82AAFF; }
-.cg-yellow { color: #FFD700; }
-.cg-gray { color: rgba(255,255,255,0.3); }
+.cg-dot-mac { width: 9px; height: 9px; border-radius: 50%; }
+.cg-dot-r { background: #FF5F57; } .cg-dot-y { background: #FEBC2E; } .cg-dot-g { background: #28C840; }
+.cg-mock-title { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.35); margin: 0 auto; }
+.cg-mock-body { padding: 22px; font-family: var(--mono); font-size: 12px; line-height: 2; color: rgba(255,255,255,0.65); }
+.cg-red { color: #E88D5D; } .cg-green { color: #5FD9C5; } .cg-blue { color: #9D8CFF; } .cg-yellow { color: #E3A458; } .cg-gray { color: rgba(255,255,255,0.3); }
 
-/* ===== CONTACT ===== */
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+/* ===== CONTACT (terminal) ===== */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
+.term-block {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px 24px; font-family: var(--mono); font-size: 13px;
 }
-.contact-info { display: flex; flex-direction: column; gap: 20px; }
-.contact-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-.contact-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.contact-value {
-  font-size: 15px;
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.contact-value:hover { color: var(--accent2); }
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.form-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.form-input, .form-textarea {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 16px;
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--text);
+.term-line { color: var(--text3); margin-bottom: 14px; }
+.prompt { color: var(--accent2); margin-right: 8px; }
+.term-out { margin-bottom: 10px; color: var(--text2); }
+.term-out a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+.term-out a:hover { color: var(--accent2); border-color: var(--accent2); }
+.term-form { display: flex; flex-direction: column; gap: 18px; }
+.term-field { display: flex; align-items: baseline; gap: 10px; }
+.term-field .fkey { color: var(--accent2); flex-shrink: 0; width: 78px; }
+.term-field input, .term-field textarea {
+  flex: 1; background: transparent; border: none; border-bottom: 1px solid var(--border);
+  font-family: var(--mono); font-size: 13px; color: var(--text); padding: 6px 0; outline: none;
   transition: border-color 0.2s;
-  outline: none;
 }
-.form-input:focus, .form-textarea:focus { border-color: var(--text3); }
-.form-textarea { resize: vertical; min-height: 120px; }
-.form-submit {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  padding: 14px 32px;
-  border-radius: 100px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: opacity 0.2s, transform 0.2s;
+.term-field input:focus, .term-field textarea:focus { border-color: var(--accent); }
+.term-field textarea { resize: vertical; min-height: 70px; }
+.term-submit {
+  align-self: flex-start; font-family: var(--mono); font-size: 12.5px;
+  background: var(--accent); color: var(--bg); border: none; padding: 10px 22px; border-radius: 6px;
+  cursor: pointer; transition: opacity 0.2s; margin-top: 6px;
 }
-.form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
+.term-submit:hover { opacity: 0.85; }
 
 /* ===== FOOTER ===== */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+footer.page-footer {
+  padding: 32px 48px 56px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 11.5px; color: var(--text3);
 }
-.footer-logo {
-  font-family: var(--serif);
-  font-size: 16px;
-  color: var(--text);
-}
-.footer-logo em { font-style: italic; color: var(--accent2); }
-.footer-copy {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-}
-.footer-links { display: flex; gap: 24px; }
-.footer-links a {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-  text-decoration: none;
-  transition: color 0.2s;
-}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: var(--text3); text-decoration: none; }
 .footer-links a:hover { color: var(--text); }
 
-/* ===== SCROLL REVEAL ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s, transform 0.7s;
-}
+/* ===== REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s, transform 0.6s; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
 
-/* ===== SIDEBAR NAV DOTS ===== */
-.side-nav {
-  position: fixed;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.side-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--border);
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-}
-.side-dot::before {
-  content: attr(data-label);
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text3);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-}
-.side-dot:hover::before { opacity: 1; }
-.side-dot.active { background: var(--accent2); transform: scale(1.4); }
-
-/* ===== LANGUAGES ===== */
-.langs-grid {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.lang-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px 24px;
-  min-width: 100px;
-  transition: all 0.2s;
-}
-.lang-item:hover { border-color: var(--accent2); transform: translateY(-2px); }
-.lang-flag { font-size: 28px; }
-.lang-name {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text2);
-  letter-spacing: 0.05em;
-}
-.lang-level {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--accent2);
-  letter-spacing: 0.1em;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .pane { padding: 64px 24px; }
+  .hero { padding-top: 90px; }
+  .hero-grid, .about-grid, .codegym-layout, .contact-grid { grid-template-columns: 1fr; }
+  .file-grid { grid-template-columns: 1fr; }
+  .file-card.pinned { grid-column: auto; }
+  footer.page-footer { padding: 28px 24px 48px; flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 
-<!-- SIDE NAV DOTS -->
-<nav class="side-nav" id="sideNav">
-  <div class="side-dot active" data-section="hero" data-label="Inicio" onclick="scrollTo('#hero')"></div>
-  <div class="side-dot" data-section="about" data-label="Sobre mí" onclick="scrollTo('#about')"></div>
-  <div class="side-dot" data-section="skills" data-label="Habilidades" onclick="scrollTo('#skills')"></div>
-  <div class="side-dot" data-section="timeline" data-label="Trayectoria" onclick="scrollTo('#timeline')"></div>
-  <div class="side-dot" data-section="projects" data-label="Proyectos" onclick="scrollTo('#projects')"></div>
-  <div class="side-dot" data-section="codegym" data-label="CodeGym" onclick="scrollTo('#codegym')"></div>
-  <div class="side-dot" data-section="contact" data-label="Contacto" onclick="scrollTo('#contact')"></div>
-</nav>
-
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="nav-logo">Ale<em>jandro</em></a>
-  <ul class="nav-links">
-    <li><a href="#about">sobre mí</a></li>
-    <li><a href="#projects">proyectos</a></li>
-    <li><a href="#codegym">CodeGym</a></li>
-    <li><a href="#contact">contacto</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">🌙</button>
-    <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download class="nav-cta">Descargar CV</a>
+<!-- TAB BAR -->
+<header class="tabbar">
+  <div class="tab-brand" onclick="scrollToId('hero')">AH</div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-target="hero"><span class="dot dot-cyan"></span>hero.tsx</button>
+    <button class="tab" data-target="about"><span class="dot dot-blue"></span>about.md</button>
+    <button class="tab" data-target="skills"><span class="dot dot-amber"></span>skills.json</button>
+    <button class="tab" data-target="log"><span class="dot dot-orange"></span>log.git</button>
+    <button class="tab" data-target="projects"><span class="dot dot-violet"></span>projects/</button>
+    <button class="tab" data-target="codegym"><span class="dot dot-mint"></span>codegym.app</button>
+    <button class="tab" data-target="contact"><span class="dot dot-red"></span>contact.sh</button>
+  </nav>
+  <div class="tabbar-right">
+    <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download class="btn-cv">↓ CV.pdf</a>
   </div>
-</nav>
+</header>
+
+<main>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-bg-text">Dev</div>
-  <div class="hero-tag">Desarrollador de Aplicaciones · 2º DAM · Barcelona</div>
-  <h1 class="hero-title">Saul<br><em>Alejandro</em><br>Henriquez.</h1>
-  <div class="hero-bottom">
-    <p class="hero-desc">Estudiante de DAM apasionado por construir productos digitales reales. Del backend al móvil, de la base de datos a la interfaz.</p>
-    <div class="hero-stats">
-      <div>
-        <span class="hero-stat-num">4+</span>
-        <span class="hero-stat-label">Proyectos</span>
-      </div>
-      <div>
-        <span class="hero-stat-num">10+</span>
-        <span class="hero-stat-label">Tecnologías</span>
-      </div>
-      <div>
-        <span class="hero-stat-num">2</span>
-        <span class="hero-stat-label">Años DAM</span>
-      </div>
+<section class="pane hero" id="hero">
+  <p class="eyebrow">// desarrollador de aplicaciones · 2º dam · barcelona</p>
+  <h1 class="hero-name">Saul Alejandro<br>Henríquez</h1>
+  <div class="hero-grid">
+    <p class="hero-intro">Estudiante de DAM apasionado por construir productos digitales reales. Del backend al móvil, de la base de datos a la interfaz.</p>
+    <div class="code-block hero-code">
+      <div class="cl"><span class="tok-kw">const</span> <span class="tok-var">dev</span> = <span class="tok-kw">new</span> <span class="tok-type">Developer</span>({</div>
+      <div class="cl ind">stack: [<span class="tok-str">"Kotlin"</span>, <span class="tok-str">"PHP"</span>, <span class="tok-str">"SQL"</span>],</div>
+      <div class="cl ind">focus: <span class="tok-str">"Android · Web · Datos"</span>,</div>
+      <div class="cl ind">mindset: <span class="tok-str">"no me rindo con un bug"</span>,</div>
+      <div class="cl">});</div>
     </div>
   </div>
-  <div class="hero-scroll">scroll</div>
+  <p class="hero-meta"><span class="tok-com">// 4+ proyectos · 10+ tecnologías · 2 años de DAM</span></p>
+  <div class="scroll-cue">▼ scroll para ver más</div>
 </section>
 
 <!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-header reveal">
-    <span class="section-num">01</span>
-    <h2 class="section-title">Sobre <em>mí</em></h2>
-  </div>
+<section class="pane" id="about">
+  <p class="eyebrow reveal">// about.md</p>
+  <h2 class="section-title reveal">Sobre mí</h2>
   <div class="about-grid">
     <div class="about-text reveal">
       <p>Soy estudiante de <strong>Desarrollo de Aplicaciones Multiplataforma</strong> con una mentalidad orientada a resolver problemas reales. Me apasiona construir herramientas que de verdad funcionen y aporten valor.</p>
       <p>Los deportes de contacto me han enseñado <strong>disciplina, constancia y trabajo en equipo</strong> — cualidades que aplico directamente al desarrollo. Cuando enfrento un bug difícil, no me rindo.</p>
       <p>Actualmente enfocado en <strong>Android con Kotlin</strong>, desarrollo web full-stack y bases de datos. Siempre buscando el siguiente reto.</p>
-
-      <!-- IDIOMAS -->
-      <div style="margin-top: 32px;">
-        <div class="section-header" style="margin-bottom: 24px;">
-          <span class="section-num" style="font-size:10px;">IDIOMAS</span>
-        </div>
-        <div class="langs-grid">
-          <div class="lang-item">
-            <span class="lang-flag">🇪🇸</span>
-            <span class="lang-name">Español</span>
-            <span class="lang-level">NATIVO</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-flag">🇬🇧</span>
-            <span class="lang-name">Inglés</span>
-            <span class="lang-level">INTERMEDIO</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-flag">🏳️</span>
-            <span class="lang-name">Catalán</span>
-            <span class="lang-level">BÁSICO</span>
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="about-details reveal reveal-delay-2">
-      <div class="detail-item">
-        <span class="detail-label">Ubicación</span>
-        <span class="detail-value">Barcelona, España</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Formación</span>
-        <span class="detail-value">2º DAM — Multiplataforma</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Email</span>
-        <span class="detail-value">shenriquez232@gmail.com</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">GitHub</span>
-        <span class="detail-value">@S23henriquez</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Disponibilidad</span>
-        <span class="detail-value">Prácticas / Junior · 2026</span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Intereses</span>
-        <span class="detail-value">Android · Web · Bases de Datos</span>
-      </div>
+    <div class="code-block about-object reveal reveal-delay-2">
+      <div class="cl">{</div>
+      <div class="cl ind"><span class="tok-var">location</span>: <span class="tok-str">"Barcelona, España"</span>,</div>
+      <div class="cl ind"><span class="tok-var">program</span>: <span class="tok-str">"2º DAM · Multiplataforma"</span>,</div>
+      <div class="cl ind"><span class="tok-var">email</span>: <span class="tok-str">"shenriquez232@gmail.com"</span>,</div>
+      <div class="cl ind"><span class="tok-var">github</span>: <span class="tok-str">"@S23henriquez"</span>,</div>
+      <div class="cl ind"><span class="tok-var">availability</span>: <span class="tok-str">"Prácticas / Junior · 2026"</span>,</div>
+      <div class="cl ind"><span class="tok-var">languages</span>: [<span class="tok-str">"es:nativo"</span>, <span class="tok-str">"en:intermedio"</span>, <span class="tok-str">"ca:básico"</span>],</div>
+      <div class="cl">}</div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section class="section skills-section" id="skills">
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Habili<em>dades</em></h2>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-group reveal">
-      <div class="skill-group-title">// Lenguajes</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Java</span>
-        <span class="skill-tag">Kotlin</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">PHP</span>
-        <span class="skill-tag">SQL</span>
-        <span class="skill-tag">HTML & CSS</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">XML</span>
-        <span class="skill-tag">VB.NET</span>
-      </div>
-    </div>
-    <div class="skill-group reveal reveal-delay-1">
-      <div class="skill-group-title">// Frameworks & Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Android Studio</span>
-        <span class="skill-tag">Laravel</span>
-        <span class="skill-tag">Firebase</span>
-        <span class="skill-tag">Git & GitHub</span>
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">Firestore</span>
-      </div>
-    </div>
-    <div class="skill-group reveal reveal-delay-2">
-      <div class="skill-group-title">// Sistemas</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Windows Admin</span>
-        <span class="skill-tag">GNU/Linux</span>
-        <span class="skill-tag">macOS</span>
-        <span class="skill-tag">Redes</span>
-      </div>
-    </div>
-    <div class="skill-group reveal reveal-delay-3">
-      <div class="skill-group-title">// Soft Skills</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Trabajo en equipo</span>
-        <span class="skill-tag">Adaptabilidad</span>
-        <span class="skill-tag">Resolución de problemas</span>
-        <span class="skill-tag">Disciplina</span>
-        <span class="skill-tag">Responsabilidad</span>
-        <span class="skill-tag">Creatividad</span>
-      </div>
-    </div>
+<section class="pane alt" id="skills">
+  <p class="eyebrow reveal">// skills.json</p>
+  <h2 class="section-title reveal">Habilidades</h2>
+  <div class="code-block skills-json reveal reveal-delay-1">
+    <div class="cl">{</div>
+    <div class="cl ind"><span class="tok-var">"lenguajes"</span>: [<span class="tok-str">"Java"</span>, <span class="tok-str">"Kotlin"</span>, <span class="tok-str">"Python"</span>, <span class="tok-str">"PHP"</span>, <span class="tok-str">"SQL"</span>, <span class="tok-str">"HTML/CSS"</span>, <span class="tok-str">"JavaScript"</span>, <span class="tok-str">"XML"</span>, <span class="tok-str">"VB.NET"</span>],</div>
+    <div class="cl ind"><span class="tok-var">"frameworks"</span>: [<span class="tok-str">"Android Studio"</span>, <span class="tok-str">"Laravel"</span>, <span class="tok-str">"Firebase"</span>, <span class="tok-str">"Git"</span>, <span class="tok-str">"MySQL"</span>, <span class="tok-str">"Firestore"</span>],</div>
+    <div class="cl ind"><span class="tok-var">"sistemas"</span>: [<span class="tok-str">"Windows Admin"</span>, <span class="tok-str">"GNU/Linux"</span>, <span class="tok-str">"macOS"</span>, <span class="tok-str">"Redes"</span>],</div>
+    <div class="cl ind"><span class="tok-var">"soft_skills"</span>: [<span class="tok-str">"Trabajo en equipo"</span>, <span class="tok-str">"Adaptabilidad"</span>, <span class="tok-str">"Resolución de problemas"</span>, <span class="tok-str">"Disciplina"</span>, <span class="tok-str">"Responsabilidad"</span>, <span class="tok-str">"Creatividad"</span>]</div>
+    <div class="cl">}</div>
   </div>
 </section>
 
-<!-- TIMELINE -->
-<section class="section" id="timeline">
-  <div class="section-header reveal">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Trayec<em>toria</em></h2>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-date">2026 — Presente</div>
-      <div class="timeline-content">
-        <div class="timeline-title">2º DAM — TFG CodeGym</div>
-        <div class="timeline-sub">CIFP / Instituto · Barcelona</div>
-        <div class="timeline-desc">Desarrollo del TFG: CodeGym, una app Android de aprendizaje de programación con gamificación. 50 lecciones, 5 lenguajes, Firebase, arquitectura MVVM y soporte multilingüe en 5 idiomas.</div>
-      </div>
+<!-- LOG.GIT -->
+<section class="pane" id="log">
+  <p class="eyebrow reveal">// git log --oneline --graph</p>
+  <h2 class="section-title reveal">Trayectoria</h2>
+  <div class="git-log">
+    <div class="commit reveal">
+      <span class="commit-dot head"></span>
+      <div class="commit-head"><span class="hash">a3f9c2d</span><span class="branch">HEAD → main</span><span class="commit-date">2026 — presente</span></div>
+      <div class="commit-title">2º DAM — TFG CodeGym</div>
+      <div class="commit-sub">CIFP / Instituto · Barcelona</div>
+      <div class="commit-desc">Desarrollo del TFG: CodeGym, una app Android de aprendizaje de programación con gamificación. 50 lecciones, 5 lenguajes, Firebase, arquitectura MVVM y soporte multilingüe en 5 idiomas.</div>
     </div>
-    <div class="timeline-item reveal reveal-delay-1">
-      <div class="timeline-date">2024 — 2025</div>
-      <div class="timeline-content">
-        <div class="timeline-title">1º DAM — Fundamentos</div>
-        <div class="timeline-sub">CIFP / Instituto · Barcelona</div>
-        <div class="timeline-desc">Primeros proyectos con Java, bases de datos relacionales, desarrollo web con HTML/CSS/PHP y fundamentos de programación orientada a objetos.</div>
-      </div>
+    <div class="commit reveal reveal-delay-1">
+      <span class="commit-dot"></span>
+      <div class="commit-head"><span class="hash">7b1e44a</span><span class="commit-date">2024 — 2025</span></div>
+      <div class="commit-title">1º DAM — Fundamentos</div>
+      <div class="commit-sub">CIFP / Instituto · Barcelona</div>
+      <div class="commit-desc">Primeros proyectos con Java, bases de datos relacionales, desarrollo web con HTML/CSS/PHP y fundamentos de programación orientada a objetos.</div>
     </div>
-    <div class="timeline-item reveal reveal-delay-2">
-      <div class="timeline-date">2023 — 2024</div>
-      <div class="timeline-content">
-        <div class="timeline-title">Certificaciones Online</div>
-        <div class="timeline-sub">OpenWebinars · Google Cloud</div>
-        <div class="timeline-desc">Curso de Cloud Computing (OpenWebinars) y Prompt Design in Vertex AI — Google Cloud Skill Badge. Primeros pasos en inteligencia artificial aplicada.</div>
-      </div>
+    <div class="commit reveal reveal-delay-2">
+      <span class="commit-dot"></span>
+      <div class="commit-head"><span class="hash">2c8d915</span><span class="commit-date">2023 — 2024</span></div>
+      <div class="commit-title">Certificaciones Online</div>
+      <div class="commit-sub">OpenWebinars · Google Cloud</div>
+      <div class="commit-desc">Curso de Cloud Computing (OpenWebinars) y Prompt Design in Vertex AI — Google Cloud Skill Badge. Primeros pasos en inteligencia artificial aplicada.</div>
     </div>
-    <div class="timeline-item reveal reveal-delay-3">
-      <div class="timeline-date">2022 — 2023</div>
-      <div class="timeline-content">
-        <div class="timeline-title">Inicio en programación</div>
-        <div class="timeline-sub">Autodidacta</div>
-        <div class="timeline-desc">Primeros proyectos personales, aprendizaje autodidacta de HTML, CSS y Python. Primer contacto con el desarrollo web y la lógica de programación.</div>
-      </div>
+    <div class="commit reveal reveal-delay-3">
+      <span class="commit-dot"></span>
+      <div class="commit-head"><span class="hash">f01a220</span><span class="commit-date">2022 — 2023</span></div>
+      <div class="commit-title">Inicio en programación</div>
+      <div class="commit-sub">Autodidacta</div>
+      <div class="commit-desc">Primeros proyectos personales, aprendizaje autodidacta de HTML, CSS y Python. Primer contacto con el desarrollo web y la lógica de programación.</div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" id="projects">
-  <div class="section-header reveal">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Proyec<em>tos</em></h2>
-  </div>
-  <div class="projects-grid">
-
-    <!-- Sistema Facturación (destacado) -->
-    <div class="project-card featured reveal" onclick="openModal('modal-factura')">
-      <span class="project-tag">// Web App · PHP · MySQL</span>
-      <h3 class="project-title">Sistema de Gestión<br>de Taller</h3>
-      <p class="project-desc">Plataforma web completa para la gestión de un taller: clientes, vehículos, facturas, presupuestos y generación de PDFs. Usado en producción real.</p>
-      <div class="project-tech">
-        <span>PHP</span><span>MySQL</span><span>HTML/CSS</span><span>FPDF</span><span>Auth</span>
+<section class="pane alt" id="projects">
+  <p class="eyebrow reveal">// projects/</p>
+  <h2 class="section-title reveal">Proyectos</h2>
+  <div class="file-grid">
+    <div class="file-card pinned reveal" onclick="openModal('modal-factura')">
+      <div class="file-row">
+        <span class="dot dot-amber"></span>
+        <span class="file-name">sistema-gestion-taller/</span>
+        <span class="pin">📌 pinned</span>
       </div>
+      <p class="file-desc">Plataforma web completa para la gestión de un taller: clientes, vehículos, facturas, presupuestos y generación de PDFs. Usado en producción real.</p>
+      <div class="file-meta">PHP · MySQL · HTML/CSS · FPDF · Auth</div>
     </div>
-
-    <!-- Landing Page Taller -->
-    <div class="project-card reveal" onclick="openModal('modal-landing')">
-      <span class="project-tag">// Web · Landing Page</span>
-      <h3 class="project-title">Landing Page<br>Taller</h3>
-      <p class="project-desc">Página web corporativa para el mismo taller. Diseño responsivo moderno, formulario de contacto y presentación de servicios.</p>
-      <div class="project-tech">
-        <span>HTML</span><span>CSS</span><span>JavaScript</span>
-      </div>
+    <div class="file-card reveal" onclick="openModal('modal-landing')">
+      <div class="file-row"><span class="dot dot-blue"></span><span class="file-name">landing-taller/</span></div>
+      <p class="file-desc">Página web corporativa para el mismo taller. Diseño responsivo moderno, formulario de contacto y presentación de servicios.</p>
+      <div class="file-meta">HTML · CSS · JavaScript</div>
     </div>
-
-    <!-- Penaltis Multiplayer -->
-    <div class="project-card reveal reveal-delay-1" onclick="openModal('modal-penaltis')">
-      <span class="project-tag">// Android · Kotlin</span>
-      <h3 class="project-title">Penaltis<br>Multiplayer</h3>
-      <p class="project-desc">Juego Android multijugador de penaltis con sistema de turnos, marcador y efectos visuales animados.</p>
-      <div class="project-tech">
-        <span>Kotlin</span><span>Android</span><span>Sockets</span>
-      </div>
+    <div class="file-card reveal reveal-delay-1" onclick="openModal('modal-penaltis')">
+      <div class="file-row"><span class="dot dot-violet"></span><span class="file-name">penaltis-multiplayer/</span></div>
+      <p class="file-desc">Juego Android multijugador de penaltis con sistema de turnos, marcador y efectos visuales animados.</p>
+      <div class="file-meta">Kotlin · Android · Sockets</div>
     </div>
-
-    <!-- To-Do List Firebase -->
-    <div class="project-card reveal reveal-delay-2" onclick="openModal('modal-todo')">
-      <span class="project-tag">// Android · Firebase</span>
-      <h3 class="project-title">To-Do List<br>con Firebase</h3>
-      <p class="project-desc">Aplicación Android de gestión de tareas con autenticación, Firestore y CRUD completo en tiempo real.</p>
-      <div class="project-tech">
-        <span>Kotlin</span><span>Firebase Auth</span><span>Firestore</span>
-      </div>
+    <div class="file-card reveal reveal-delay-2" onclick="openModal('modal-todo')">
+      <div class="file-row"><span class="dot dot-mint"></span><span class="file-name">todo-firebase/</span></div>
+      <p class="file-desc">Aplicación Android de gestión de tareas con autenticación, Firestore y CRUD completo en tiempo real.</p>
+      <div class="file-meta">Kotlin · Firebase Auth · Firestore</div>
     </div>
-
   </div>
 </section>
 
-<!-- CODEGYM FEATURE -->
-<section class="section codegym-section" id="codegym">
-  <div class="section-header reveal">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Code<em>Gym</em></h2>
-  </div>
+<!-- CODEGYM -->
+<section class="pane" id="codegym">
+  <p class="eyebrow reveal">// codegym.app</p>
+  <h2 class="section-title reveal">CodeGym</h2>
   <div class="codegym-layout">
     <div class="codegym-text reveal">
       <p>Mi proyecto más ambicioso. Una aplicación Android de aprendizaje de programación al estilo Duolingo, desarrollada como Trabajo de Fin de Grado junto a Roc Benach.</p>
       <p>Diseñada desde cero con arquitectura MVVM, Firebase como backend, 50 lecciones con ejercicios reales y un sistema completo de gamificación.</p>
-      <div class="codegym-stats">
-        <div class="cg-stat">
-          <span class="cg-stat-num">50</span>
-          <span class="cg-stat-label">// Lecciones</span>
-        </div>
-        <div class="cg-stat">
-          <span class="cg-stat-num">5</span>
-          <span class="cg-stat-label">// Lenguajes</span>
-        </div>
-        <div class="cg-stat">
-          <span class="cg-stat-num">13</span>
-          <span class="cg-stat-label">// Logros</span>
-        </div>
-        <div class="cg-stat">
-          <span class="cg-stat-num">5</span>
-          <span class="cg-stat-label">// Idiomas</span>
-        </div>
+      <div class="repo-stats">
+        <div class="repo-stat"><span class="repo-stat-icon">★</span><span class="repo-stat-num">50</span><span class="repo-stat-label">lecciones</span></div>
+        <div class="repo-stat"><span class="repo-stat-icon">⑂</span><span class="repo-stat-num">5</span><span class="repo-stat-label">lenguajes</span></div>
+        <div class="repo-stat"><span class="repo-stat-icon">✓</span><span class="repo-stat-num">13</span><span class="repo-stat-label">logros</span></div>
+        <div class="repo-stat"><span class="repo-stat-icon">🌐</span><span class="repo-stat-num">5</span><span class="repo-stat-label">idiomas</span></div>
       </div>
       <div class="codegym-actions">
         <a href="#" class="btn-primary">Ver demo →</a>
@@ -1206,9 +684,9 @@ footer {
     <div class="reveal reveal-delay-2">
       <div class="cg-mockup">
         <div class="cg-mock-bar">
-          <div class="cg-dot cg-dot-r"></div>
-          <div class="cg-dot cg-dot-y"></div>
-          <div class="cg-dot cg-dot-g"></div>
+          <div class="cg-dot-mac cg-dot-r"></div>
+          <div class="cg-dot-mac cg-dot-y"></div>
+          <div class="cg-dot-mac cg-dot-g"></div>
           <span class="cg-mock-title">codegym — lesson_py_1.kt</span>
         </div>
         <div class="cg-mock-body">
@@ -1231,52 +709,31 @@ footer {
 </section>
 
 <!-- CONTACT -->
-<section class="section" id="contact">
-  <div class="section-header reveal">
-    <span class="section-num">06</span>
-    <h2 class="section-title">Contac<em>to</em></h2>
-  </div>
-  <div class="contact-layout">
-    <div class="contact-info reveal">
-      <div class="contact-item">
-        <span class="contact-label">Email</span>
-        <a href="mailto:shenriquez232@gmail.com" class="contact-value">shenriquez232@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">GitHub</span>
-        <a href="https://github.com/S23henriquez" target="_blank" class="contact-value">github.com/S23henriquez</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">LinkedIn</span>
-        <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/" target="_blank" class="contact-value">Saul Alejandro Henriquez Diaz</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label">Currículum</span>
-        <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download class="contact-value">Descargar CV →</a>
-      </div>
+<section class="pane alt" id="contact">
+  <p class="eyebrow reveal">// contact.sh</p>
+  <h2 class="section-title reveal">Contacto</h2>
+  <div class="contact-grid">
+    <div class="term-block reveal">
+      <div class="term-line"><span class="prompt">$</span>cat contact.info</div>
+      <div class="term-out">email &nbsp;→ <a href="mailto:shenriquez232@gmail.com">shenriquez232@gmail.com</a></div>
+      <div class="term-out">github &nbsp;→ <a href="https://github.com/S23henriquez" target="_blank">github.com/S23henriquez</a></div>
+      <div class="term-out">linkedin → <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/" target="_blank">Saul Alejandro Henriquez Diaz</a></div>
+      <div class="term-out">cv &nbsp;&nbsp;&nbsp;→ <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download>CV_ALEJANDRO_HENRIQUEZ.pdf</a></div>
     </div>
-    <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/movkwqay" method="POST">
-      <div class="form-group">
-        <label class="form-label" for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" class="form-input" required placeholder="Tu nombre">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="email">Email</label>
-        <input type="email" id="email" name="email" class="form-input" required placeholder="tu@email.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" class="form-textarea" required placeholder="¿En qué puedo ayudarte?"></textarea>
-      </div>
-      <button type="submit" class="form-submit">Enviar mensaje →</button>
+    <form class="term-block term-form reveal reveal-delay-2" action="https://formspree.io/f/movkwqay" method="POST">
+      <div class="term-line"><span class="prompt">$</span>./send-message.sh</div>
+      <label class="term-field"><span class="fkey">nombre</span><input type="text" name="nombre" required placeholder="tu nombre"></label>
+      <label class="term-field"><span class="fkey">email</span><input type="email" name="email" required placeholder="tu@email.com"></label>
+      <label class="term-field"><span class="fkey">mensaje</span><textarea name="mensaje" required placeholder="¿en qué puedo ayudarte?"></textarea></label>
+      <button type="submit" class="term-submit">↵ enviar</button>
     </form>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Ale<em>jandro</em></div>
-  <span class="footer-copy">© 2026 Saul Alejandro Henriquez Diaz</span>
+</main>
+
+<footer class="page-footer">
+  <span>© 2026 Saul Alejandro Henriquez Diaz</span>
   <div class="footer-links">
     <a href="https://github.com/S23henriquez" target="_blank">GitHub</a>
     <a href="https://www.linkedin.com/in/alejandro-henriquez-41311b219/" target="_blank">LinkedIn</a>
@@ -1284,17 +741,28 @@ footer {
   </div>
 </footer>
 
+<!-- STATUS BAR -->
+<footer class="statusbar">
+  <div class="sb-left">
+    <span class="sb-branch">⑂ main</span>
+    <span id="sbSection">hero.tsx</span>
+  </div>
+  <div class="sb-right">
+    <span>UTF-8</span>
+    <span>ES</span>
+    <button id="themeBtn" class="sb-theme">🌙 dark</button>
+  </div>
+</footer>
+
 <!-- MODALS -->
 <div class="modal-overlay" id="modal-factura">
   <div class="modal-box">
     <div class="modal-header">
-      <div>
-        <span class="modal-tag">// Web App · PHP · MySQL</span>
-        <h2 class="modal-title">Sistema de Gestión de Taller</h2>
-      </div>
+      <span>projects/sistema-gestion-taller/README.md</span>
       <button class="modal-close" onclick="closeModal('modal-factura')">✕</button>
     </div>
     <div class="modal-body">
+      <h3>Sistema de Gestión de Taller</h3>
       <p>Aplicación web completa desarrollada en <strong>PHP con MySQL</strong> para gestionar clientes, vehículos, facturas y presupuestos de un taller real. Usada activamente en producción.</p>
       <ul>
         <li>Gestión de clientes con múltiples vehículos asociados</li>
@@ -1312,13 +780,11 @@ footer {
 <div class="modal-overlay" id="modal-landing">
   <div class="modal-box">
     <div class="modal-header">
-      <div>
-        <span class="modal-tag">// Web · Landing Page</span>
-        <h2 class="modal-title">Landing Page del Taller</h2>
-      </div>
+      <span>projects/landing-taller/README.md</span>
       <button class="modal-close" onclick="closeModal('modal-landing')">✕</button>
     </div>
     <div class="modal-body">
+      <h3>Landing Page del Taller</h3>
       <p>Página web corporativa diseñada y desarrollada para el mismo taller del sistema de facturación. Presentación profesional de la empresa en internet.</p>
       <ul>
         <li>Diseño moderno y completamente responsivo</li>
@@ -1335,13 +801,11 @@ footer {
 <div class="modal-overlay" id="modal-penaltis">
   <div class="modal-box">
     <div class="modal-header">
-      <div>
-        <span class="modal-tag">// Android · Kotlin</span>
-        <h2 class="modal-title">Penaltis Multiplayer</h2>
-      </div>
+      <span>projects/penaltis-multiplayer/README.md</span>
       <button class="modal-close" onclick="closeModal('modal-penaltis')">✕</button>
     </div>
     <div class="modal-body">
+      <h3>Penaltis Multiplayer</h3>
       <p>Juego Android multijugador que simula un partido de penaltis entre dos jugadores (Host y Guest) con lógica de turnos y resultado final.</p>
       <ul>
         <li>Comunicación entre jugadores en tiempo real</li>
@@ -1358,13 +822,11 @@ footer {
 <div class="modal-overlay" id="modal-todo">
   <div class="modal-box">
     <div class="modal-header">
-      <div>
-        <span class="modal-tag">// Android · Firebase</span>
-        <h2 class="modal-title">To-Do List con Firebase</h2>
-      </div>
+      <span>projects/todo-firebase/README.md</span>
       <button class="modal-close" onclick="closeModal('modal-todo')">✕</button>
     </div>
     <div class="modal-body">
+      <h3>To-Do List con Firebase</h3>
       <p>Aplicación Android de gestión de tareas personales con autenticación de usuarios y sincronización en la nube mediante Firebase.</p>
       <ul>
         <li>Registro e inicio de sesión con Firebase Authentication</li>
@@ -1381,45 +843,52 @@ footer {
 // Theme toggle
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
-const saved = localStorage.getItem('theme') || 'light';
+const saved = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', saved);
-themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+themeBtn.textContent = saved === 'dark' ? '🌙 dark' : '☀️ light';
 
 themeBtn.addEventListener('click', () => {
   const current = html.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', next);
-  themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+  themeBtn.textContent = next === 'dark' ? '🌙 dark' : '☀️ light';
   localStorage.setItem('theme', next);
 });
 
 // Scroll reveal
-const observer = new IntersectionObserver(entries => {
+const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Side nav dots
-const sections = ['hero','about','skills','timeline','projects','codegym','contact'];
-const dots = document.querySelectorAll('.side-dot');
+// Tabs + status bar sync
+const sectionIds = ['hero','about','skills','log','projects','codegym','contact'];
+const tabLabels = { hero: 'hero.tsx', about: 'about.md', skills: 'skills.json', log: 'log.git', projects: 'projects/', codegym: 'codegym.app', contact: 'contact.sh' };
+const tabs = document.querySelectorAll('.tab');
+const sbSection = document.getElementById('sbSection');
 
 const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      dots.forEach(d => d.classList.remove('active'));
-      const active = document.querySelector(`.side-dot[data-section="${e.target.id}"]`);
-      if (active) active.classList.add('active');
+      tabs.forEach(t => t.classList.remove('active'));
+      const activeTab = document.querySelector(`.tab[data-target="${e.target.id}"]`);
+      if (activeTab) activeTab.classList.add('active');
+      sbSection.textContent = tabLabels[e.target.id] || '';
     }
   });
 }, { threshold: 0.4 });
 
-sections.forEach(id => {
+sectionIds.forEach(id => {
   const el = document.getElementById(id);
   if (el) sectionObserver.observe(el);
 });
 
-function scrollTo(selector) {
-  document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth' });
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => scrollToId(tab.dataset.target));
+});
+
+function scrollToId(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Modals
@@ -1432,14 +901,10 @@ function closeModal(id) {
   document.body.style.overflow = '';
 }
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeModal(overlay.id);
-  });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(overlay.id); });
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
-  }
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
 });
 </script>
 </body>
