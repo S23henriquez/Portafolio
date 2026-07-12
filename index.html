@@ -257,6 +257,42 @@ body {
   line-height: 1.8;
   max-width: 40ch;
 }
+.hero-portrait {
+  display: flex;
+  justify-content: center;
+}
+.portrait-card {
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 88%, transparent), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
+}
+.portrait-frame {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--bg3);
+}
+.portrait-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+.portrait-caption {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
 .hero-meta {
   font-family: var(--mono);
   font-size: 12.5px;
@@ -289,7 +325,6 @@ body {
 .skills-json .cl .arr {
   color: var(--text2);
 }
-.skills-json .tok-str { }
 
 /* ===== GIT LOG ===== */
 .git-log { position: relative; padding-left: 36px; }
@@ -525,12 +560,12 @@ footer.page-footer {
   <div class="tab-brand" onclick="scrollToId('hero')">AH</div>
   <nav class="tabs" id="tabs">
     <button class="tab active" data-target="hero"><span class="dot dot-cyan"></span>hero.tsx</button>
-    <button class="tab" data-target="about"><span class="dot dot-blue"></span>about.md</button>
-    <button class="tab" data-target="skills"><span class="dot dot-amber"></span>skills.json</button>
-    <button class="tab" data-target="log"><span class="dot dot-orange"></span>log.git</button>
-    <button class="tab" data-target="projects"><span class="dot dot-violet"></span>projects/</button>
-    <button class="tab" data-target="codegym"><span class="dot dot-mint"></span>codegym.app</button>
-    <button class="tab" data-target="contact"><span class="dot dot-red"></span>contact.sh</button>
+    <button class="tab" data-target="about"><span class="dot dot-blue"></span>About Me</button>
+    <button class="tab" data-target="skills"><span class="dot dot-amber"></span>Skills</button>
+    <button class="tab" data-target="log"><span class="dot dot-orange"></span>Trayectoria</button>
+    <button class="tab" data-target="projects"><span class="dot dot-violet"></span>Proyectos/</button>
+    <button class="tab" data-target="codegym"><span class="dot dot-mint"></span>Apps</button>
+    <button class="tab" data-target="contact"><span class="dot dot-red"></span>Contacto</button>
   </nav>
   <div class="tabbar-right">
     <a href="img/CV_ALEJANDRO_HENRIQUEZ.pdf" download class="btn-cv">↓ CV.pdf</a>
@@ -545,16 +580,19 @@ footer.page-footer {
   <h1 class="hero-name">Saul Alejandro<br>Henríquez</h1>
   <div class="hero-grid">
     <p class="hero-intro">Estudiante de DAM apasionado por construir productos digitales reales. Del backend al móvil, de la base de datos a la interfaz.</p>
-    <div class="code-block hero-code">
-      <div class="cl"><span class="tok-kw">const</span> <span class="tok-var">dev</span> = <span class="tok-kw">new</span> <span class="tok-type">Developer</span>({</div>
-      <div class="cl ind">stack: [<span class="tok-str">"Kotlin"</span>, <span class="tok-str">"PHP"</span>, <span class="tok-str">"SQL"</span>],</div>
-      <div class="cl ind">focus: <span class="tok-str">"Android · Web · Datos"</span>,</div>
-      <div class="cl ind">mindset: <span class="tok-str">"no me rindo con un bug"</span>,</div>
-      <div class="cl">});</div>
+    <div class="hero-portrait">
+      <div class="portrait-card">
+        <div class="portrait-frame">
+          <img src="img/FOTO%20DE%20PP.jpg" alt="Foto de perfil de Saul Alejandro Henríquez">
+        </div>
+        <div class="portrait-caption">
+          <span>perfil.jpg</span>
+          <span>Barcelona · DAM</span>
+        </div>
+      </div>
     </div>
   </div>
-  <p class="hero-meta"><span class="tok-com">// 4+ proyectos · 10+ tecnologías · 2 años de DAM</span></p>
-  <div class="scroll-cue">▼ scroll para ver más</div>
+  <p class="hero-meta"><span class="tok-com"> 4+ proyectos · 10+ tecnologías · 2 años de DAM</span></p>
 </section>
 
 <!-- ABOUT -->
