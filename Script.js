@@ -1,99 +1,62 @@
-// ---------- Tema claro/oscuro con persistencia ----------
 const root = document.documentElement;
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
+const themeToggle = document.getElementById('theme-toggle');
+const themeLabel = themeToggle.querySelector('.theme-label');
+const menuToggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('main-nav');
+const sections = [...document.querySelectorAll('.section-anchor')];
+const navLinks = [...document.querySelectorAll('.nav-link')];
 
-function applyTheme(theme) {
-  if (theme === 'dark') {
-    root.classList.add('dark');
-    themeIcon.textContent = '🌙';
-  } else {
-    root.classList.remove('dark');
-    themeIcon.textContent = '☀️';
-  }
+function updateThemeButton() {
+  const dark = root.dataset.theme === 'dark';
+  themeLabel.textContent = dark ? 'claro' : 'oscuro';
+  themeToggle.querySelector('span').textContent = dark ? '☼' : '☾';
+  themeToggle.setAttribute('aria-pressed', String(dark));
 }
-
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  applyTheme(savedTheme);
-} else {
-  // Por defecto: oscuro (identidad visual del portfolio)
-  applyTheme('dark');
-}
+updateThemeButton();
 
 themeToggle.addEventListener('click', () => {
-  const isDark = root.classList.contains('dark');
-  const nextTheme = isDark ? 'light' : 'dark';
-  applyTheme(nextTheme);
-  localStorage.setItem('theme', nextTheme);
+  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('theme', root.dataset.theme);
+  updateThemeButton();
 });
 
-// ---------- Menú móvil ----------
-const menuToggle = document.getElementById('menuToggle');
-const desktopNav = document.getElementById('desktopNav');
-
-menuToggle.addEventListener('click', () => {
-  desktopNav.classList.toggle('is-open');
-});
-
-// ---------- Scroll suave a secciones + cierre de menú móvil ----------
-document.querySelectorAll('[data-scroll-to]').forEach((el) => {
-  el.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = el.getAttribute('data-scroll-to');
-    const target = document.querySelector(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-    desktopNav.classList.remove('is-open');
-  });
-});
-
-// ---------- Resaltar el enlace de nav activo según la sección visible ----------
-const sections = document.querySelectorAll('.section-anchor');
-const navLinks = document.querySelectorAll('.nav-link');
-
-const navObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = `#${entry.target.id}`;
-        navLinks.forEach((link) => {
-          link.classList.toggle('is-active', link.getAttribute('data-scroll-to') === id);
-        });
-      }
-    });
-  },
-  { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
-);
-
-sections.forEach((section) => navObserver.observe(section));
-
-// ---------- Animaciones de entrada al hacer scroll ----------
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const revealEls = document.querySelectorAll('.reveal');
-
-if (prefersReducedMotion) {
-  // Si el usuario prefiere menos movimiento, mostrar todo directamente sin animar
-  revealEls.forEach((el) => el.classList.add('is-visible'));
-} else {
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  revealEls.forEach((el) => revealObserver.observe(el));
+function scrollToSection(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  nav.classList.remove('is-open');
+  menuToggle.setAttribute('aria-expanded', 'false');
 }
 
-// ---------- Botón volver arriba ----------
-const backToTop = document.getElementById('backToTop');
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+document.querySelectorAll('[data-scroll]').forEach(el =>
+  el.addEventListener('click', () => scrollToSection(el.dataset.scroll))
+);
+
+menuToggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('is-open');
+  menuToggle.setAttribute('aria-expanded', String(open));
 });
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach(link =>
+      link.classList.toggle('is-active', link.dataset.scroll === entry.target.id)
+    );
+  });
+}, { rootMargin: '-35% 0px -55% 0px' });
+sections.forEach(section => sectionObserver.observe(section));
+
+const revealElements = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries =>
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    }),
+    { threshold: 0.12 }
+  );
+  revealElements.forEach(el => revealObserver.observe(el));
+} else {
+  revealElements.forEach(el => el.classList.add('is-visible'));
+}

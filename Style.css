@@ -171,6 +171,16 @@ button, a { -webkit-tap-highlight-color: transparent; cursor: pointer; }
 .project-footer > a { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid rgba(169,140,255,.33); color: var(--violet-soft); transition: background 180ms ease, color 180ms ease; }
 .project-footer > a:hover { background: var(--violet); color: #18131f; }
 
+/* Icono de enlace para tarjetas de proyecto que son un <a> completo (ej. FutchiGol) */
+.project-footer > .project-link-indicator {
+  width: 27px; height: 27px; display: grid; place-items: center;
+  border: 1px solid rgba(169,140,255,.33); color: var(--violet-soft);
+  transition: background 180ms ease, color 180ms ease;
+}
+.project-card:hover .project-footer > .project-link-indicator {
+  background: var(--violet); color: #18131f;
+}
+
 .contact-inner { display: grid; grid-template-columns: 1.1fr .9fr; align-items: end; gap: 80px; }
 .contact-section h2 { margin: 0; color: var(--ink); font: 500 clamp(2.8rem, 6.2vw, 5.5rem)/.94 var(--mono); letter-spacing: -.095em; }
 .contact-section h2 span { color: var(--violet-soft); }
